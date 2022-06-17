@@ -1,0 +1,258 @@
+.global-container {
+    height: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bgadmin {
+    /* background-color: red; */
+    background-image: url("../img/bglogin.jpg");
+
+    /* background-image: url("img_girl.jpg"); */
+
+    /* Full height */
+    /* height: 100%;  */
+
+    /* Center and scale the image nicely */
+    /* background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+
+.hero-bg-user {
+    background-image: url("../img/bgloginuser.jpg");
+    background-size: cover;
+    height: 1000px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.global-container-admin {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    background-color: white;
+    box-shadow: 5px 7px 37px 3px rgba(0, 0, 0, 0.36);
+}
+
+.loginadmin-form {
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 5px 7px 37px 3px rgba(0, 0, 0, 0.36);
+}
+
+.hero {
+    padding: 20px;
+    width: 100%;
+}
+
+.carousel-inner {
+    height: 500px;
+}
+
+.carousel-img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.gambar-hero {
+    width: 100%;
+    object-fit: cover;
+    margin-left: 30px;
+    height: 500px;
+}
+
+.content-produk {
+    margin: 0 auto;
+    padding: 30px;
+    padding-top: 60px;
+    height: 300px;
+    background-color: rgb(235, 235, 235);
+}
+
+.content-custom {
+    margin: 0 auto;
+    padding: 30px;
+    padding-top: 60px;
+    height: 300px;
+}
+
+/* .card:hover {
+    transform: scale(1.02);
+} */
+
+.container-custom {
+    margin-top: 70px;
+}
+
+.container-belanja {
+    margin-top: 70px;
+}
+
+.konten-about {
+    margin-top: -47px;
+}
+
+.isi-about {
+    height: 200px;
+    width: 100%;
+}
+
+.header-custom {
+    margin: 0 auto;
+    padding: 30px;
+    padding-top: 60px;
+    height: 200px;
+    background-color: rgb(235, 235, 235);
+}
+
+.konten-header-home {
+    margin-top: 70px;
+    padding: 30px;
+    padding-top: 60px;
+    height: 300px;
+    background-color: rgb(235, 235, 235);
+}
+
+.header-belanja {
+    padding: 30px;
+    padding-top: 60px;
+    height: 300px;
+    background-color: rgb(235, 235, 235);
+}
+
+.bg {
+    background-image: url("img/bglogin.jpg");
+    background-color: brown;
+    height: 100%;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.imgdetailproduk {
+    object-fit: cover;
+    width: 500px;
+    height: 380px;
+}
+
+.profilcust{
+    margin-top: 123px;
+}
+.datacust{
+    margin-top: 70px;
+}
+
+/* CSS Profil */
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile-button {
+    box-shadow: none;
+    border: none
+}
+
+
+.profile-button:focus {
+    box-shadow: none
+}
+
+.profile-button:active {
+    box-shadow: none
+}
+
+.back:hover {
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+/* CSS Pesan Kaos */
+
+.totalharga{
+    background-color: rgb(228, 167, 0);
+    font-weight: bold;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.konten-custom h5{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+h3 .sub-tebal{
+    font-weight: bold;
+}
+
+.datepicker input[type=text]{
+padding-left: 40px;
+}
+
+.datepicker{
+    position: relative;
+}
+
+.datepicker i{
+    position: absolute;
+    left:0px;
+    top: 1px;
+    padding: 9px 13px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.datepicker input[type=text]:focus + i{
+color: dodgerblue;
+
+}
+  /* Date Picker */
+  /* body {
+    font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: #fff; }
+  
+  p {
+    color: #b3b3b3;
+    font-weight: 300; }
+  
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
+   */
+  /* a {
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease; }
+    a, a:hover {
+      text-decoration: none !important; }
+  
+  .content {
+    padding: 7rem 0; } */
+  
+  /* h2 {
+    font-size: 20px; } */
+  
+  /* .form-control:active, .form-control:focus {
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+   */
