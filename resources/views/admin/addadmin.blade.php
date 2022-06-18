@@ -67,12 +67,13 @@
                     @enderror
 
                     <div class="mb-3">
-                        <label for="ulangpassword" class="form-label">Ulang Password</label>
-                        <input type="password" class="form-control @error('ulangpassword_admin') is invalid @enderror"
-                            id="ulangpassword" name="ulangpassword">
+                        <label for="password_confirmation" class="form-label">Ulang Password</label>
+                        <input type="password"
+                            class="form-control @error('password_confirmation_admin') is invalid @enderror"
+                            id="password_confirmation" name="password_confirmation">
                     </div>
 
-                    @error('ulangpassword_admin')
+                    @error('password_confirmation_admin')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
                         </div>

@@ -35,6 +35,7 @@ class LoginRequestAdmin extends FormRequest
             'password' => ['required', 'string'],
         ];
     }
+
     /**
      * Attempt to authenticate the request's credentials.
      *
@@ -43,12 +44,9 @@ class LoginRequestAdmin extends FormRequest
      * @throws \Illuminate\Validation\ValidationException
      */
 
-
     public function authenticate()
     {
         $this->ensureIsNotRateLimited();
-
-        dd(Auth::guard('admin')->attempt($this->only('username_admin', 'password')));
         if (!Auth::guard('admin')->attempt($this->only('username_admin', 'password'))) {
             RateLimiter::hit($this->throttleKey());
             throw ValidationException::withMessages([

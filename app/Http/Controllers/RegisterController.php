@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\customer;
 use App\Models\admins;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class RegisterController extends Controller
 {
@@ -46,18 +49,31 @@ class RegisterController extends Controller
     public function add_admin(Request $request)
     {
         $request->validate([
-            'nama_admin' => 'required',
-            'username_admin' => 'required|unique:admin,username_admin',
-            'password' => 'required',
-            'ulangpassword' => 'required|same:password'
+            'nama_admin' => ['required', 'string', 'max:255'],
+            'username_admin' => ['required', 'string', 'max:20', 'unique:admin'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password_confirmation' => 'required|same:password'
         ]);
 
         $addadmin = admins::create([
-            'id_admin' => $request->id,
             'nama_admin' => $request->nama_admin,
             'username_admin' => $request->username_admin,
-            'password' => $request->password
+            'password' => Hash::make($request->password),
         ]);
+
+        // $request->validate([
+        //     'nama_admin' => 'required',
+        //     'username_admin' => 'required|unique:admin,username_admin',
+        //     'password' => 'required',
+        //     'ulangpassword' => 'required|same:password'
+        // ]);
+
+        // $addadmin = admins::create([
+        //     'id_admin' => $request->id,
+        //     'nama_admin' => $request->nama_admin,
+        //     'username_admin' => $request->username_admin,
+        //     'password' => $request->password
+        // ]);
 
         if ($addadmin) {
             session()->flash('berhasil', 'Admin Berhasil ditambahkan');

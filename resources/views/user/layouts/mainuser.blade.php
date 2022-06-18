@@ -94,7 +94,7 @@
                             <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                                 @auth
                                     <a class="nav-link d-flex align-items-center" href="#" data-bs-toggle="dropdown">
-                                        {{ Auth::user()->nama_cust }} <i class="ms-2 fa-solid fa-angle-down"></i>
+                                        {{ Auth::user()->un_cust }} <i class="ms-2 fa-solid fa-angle-down"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                         <div class="dropdown-divider"></div>

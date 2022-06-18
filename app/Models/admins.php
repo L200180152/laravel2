@@ -14,7 +14,6 @@ class admins extends Authenticatable
 
     protected $table = 'admin';
     // protected $guarded = [];
-    protected $primarykey = 'id';
 
     use HasApiTokens, HasFactory, Notifiable;
 

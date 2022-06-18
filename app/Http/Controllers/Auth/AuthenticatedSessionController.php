@@ -16,6 +16,12 @@ class AuthenticatedSessionController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function create_briz()
+    {
+        return view('auth.login');
+    }
+
     public function create()
     {
         // return view('auth.login');
@@ -33,6 +39,8 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      *
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
+     * 
+     * 
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(LoginRequest $request)
@@ -51,7 +59,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // return redirect()->intended(RouteServiceProvider::HOME);
         return redirect()->intended('/admins');
     }
 
@@ -76,12 +83,12 @@ class AuthenticatedSessionController extends Controller
 
     public function destroy_admin(Request $request)
     {
-        Auth::guard('admins')->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/login_admin');
+        return redirect('/loginadmin');
     }
 }

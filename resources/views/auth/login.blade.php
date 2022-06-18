@@ -12,7 +12,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('loginaction') }}">
             @csrf
 
             <!-- Email Address -->
@@ -24,9 +24,10 @@
             </div> --}}
 
             <div>
-                <x-label for="un_cust" :value="__('Username')" />
+                <x-label for="username_admin" :value="__('Username')" />
 
-                <x-input id="un_cust" class="block mt-1 w-full" type="text" name="un_cust" required autofocus />
+                <x-input id="username_admin" class="block mt-1 w-full" type="text" name="username_admin" required
+                    autofocus />
             </div>
 
             <!-- Password -->

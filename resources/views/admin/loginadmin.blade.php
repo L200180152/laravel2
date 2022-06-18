@@ -26,16 +26,8 @@
                     Selamat Datang Admin
                 </h1>
 
-
-                {{-- @if (session()->has('LoginError'))
-                    <div class="alert alert-danger alert-dismissible fade-show" role="alert">
-                        {{ session('LoginError') }}
-                        <button type="button" class="bt-close" data-bs-dismiss='alert' aria-label="close"></button>
-                    </div>
-                @endif --}}
-
                 <div class="card-text p-2">
-                    <form action="/login_admin" method="POST" width="100">
+                    <form action="{{ route('loginadmin') }}" method="POST" width="100">
                         @csrf
                         <div class="mb-2">
                             <label for="username_admin" class="form-label">Username</label>
@@ -50,11 +42,11 @@
                         @enderror
 
                         <div class="mb-3">
-                            <label for="password_admin" class="form-label">Password</label>
-                            <input type="password" class="form-control @error('password_admin') is invalid @enderror"
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control @error('password') is invalid @enderror"
                                 id="password" name="password">
                         </div>
-                        @error('password_admin')
+                        @error('password')
                             <div class="alert alert-danger mt-2">
                                 {{ $message }}
                             </div>

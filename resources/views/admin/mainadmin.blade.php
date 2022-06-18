@@ -180,9 +180,12 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header">Admin</span>
                         <div class="dropdown-divider"></div>
-                        <a href="{{ route('logout_admin') }}" class="dropdown-item text-center">
-                            <i class="fas fa-sign-out-alt mr-2"></i> Log Out
-                        </a>
+                        <form action="{{ route('logoutadmin') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item text-center">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                            </button>
+                        </form>
                         <div class="dropdown-divider"></div>
                         <a href="/add-admin" class="dropdown-item dropdown-footer">Tambah Admin</a>
                     </div>
@@ -211,7 +214,7 @@
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">
-                            @if (Route::has('login'))
+                            @if (Route::has('loginadmin'))
                                 @auth
                                     <a href="#"
                                         class="d-block">{{ Auth::guard('admin')->user()->nama_admin }}</a>
