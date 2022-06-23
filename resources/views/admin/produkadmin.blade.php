@@ -66,8 +66,8 @@
 
                                         <div class="form-group">
                                             <label for="desc_produk">Deskripsi</label>
-                                            <textarea class="form-control @error('desc_produk') is-invalid @enderror" name="desc_produk" id="desc_produk" cols="30"
-                                                rows="10" placeholder="deskripsi produk"></textarea>
+                                            <textarea class="form-control @error('desc_produk') is-invalid @enderror" name="desc_produk" id="desc_produk"
+                                                cols="30" rows="10" placeholder="deskripsi produk"></textarea>
                                         </div>
 
                                         @error('desc_produk')
@@ -170,7 +170,7 @@
                                     <form action="/produk-adm/{{ $item->id_produk }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
-                                        {{-- <input type="hidden" name="id" value="{{ $item->id }}"> --}}
+
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -189,14 +189,16 @@
                                                             value="{{ $item->id_produk }}">
                                                         <div class="form-group">
                                                             <label for="namaproduk">Nama Produk</label>
-                                                            <input type="text" class="form-control" id="updatenamaproduk"
-                                                                placeholder="nama produk" name="updatenamaproduk"
+                                                            <input type="text" class="form-control"
+                                                                id="updatenamaproduk" placeholder="nama produk"
+                                                                name="updatenamaproduk"
                                                                 value="{{ $item->nama_produk }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="hargaproduk">Harga</label>
-                                                            <input type="text" class="form-control" id="updatehargaproduk"
-                                                                placeholder="harga produk" name="updatehargaproduk"
+                                                            <input type="text" class="form-control"
+                                                                id="updatehargaproduk" placeholder="harga produk"
+                                                                name="updatehargaproduk"
                                                                 value="{{ $item->harga_produk }}">
                                                         </div>
                                                         <div class="form-group">
@@ -206,14 +208,16 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="beratproduk">Berat Produk</label>
-                                                            <input type="text" class="form-control" id="updateberatproduk"
-                                                                placeholder="berat produk" name="updateberatproduk"
+                                                            <input type="text" class="form-control"
+                                                                id="updateberatproduk" placeholder="berat produk"
+                                                                name="updateberatproduk"
                                                                 value="{{ $item->berat_produk }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="stokproduk">Stok</label>
-                                                            <input type="text" class="form-control" id="updatestokproduk"
-                                                                placeholder="stok produk" name="updatestokproduk"
+                                                            <input type="text" class="form-control"
+                                                                id="updatestokproduk" placeholder="stok produk"
+                                                                name="updatestokproduk"
                                                                 value="{{ $item->stok_produk }}">
                                                         </div>
                                                         <div class="form-group">
@@ -249,7 +253,8 @@
 
 
     {{-- button hapus --}}
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default{{ $item->id_produk }}">
+    <button type="button" class="btn btn-danger" data-toggle="modal"
+        data-target="#modal-default{{ $item->id_produk }}">
         Hapus
     </button>
 

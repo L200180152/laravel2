@@ -1,8 +1,7 @@
 @extends('user.layouts.mainuser')
 
 @section('container')
-    <div class="konten-about"
-        style="max-width: 100%;overflow-x: hidden;margin-top: 100px; background-color: rgb(32, 63, 150)">
+    <div class="konten-about" style="max-width: 100%;overflow-x: hidden;margin-top: 80px; background-color: rgb(32, 63, 150)">
         <div class="row bg-gradient p-5 text-light d-flex justify-content-center">
             <div class="header-tentangkami p-3 ">
                 <h1 class="text-center" style="font-weight: bold;">Huts Apparel</h1>
@@ -45,7 +44,8 @@
                             </div>
                             <div class="form-group mb-2">
                                 <label for="pesan_user" class="mb-2">Pesan</label>
-                                <textarea name="pesan_user" class="form-control" id="pesan_user" cols="30" rows="5" placeholder="Masukkan Pesan"></textarea>
+                                <textarea name="pesan_user" class="form-control" id="pesan_user" cols="30" rows="5"
+                                    placeholder="Masukkan Pesan"></textarea>
                             </div>
                         </div>
                         <div class="">

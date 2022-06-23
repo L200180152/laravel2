@@ -26,22 +26,11 @@ use PhpParser\Node\Stmt\Function_;
 
 
 
-// Route::get('/profiluser', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
-
-
 require __DIR__ . '/auth.php';
-
-// Route::get('/loginuser', function () {
-//     return view('login.login', [
-//         "judul" => "Login User"
-//     ]);
-// });
 
 // Admin
 
-Route::middleware('auth:admin', 'is_admin')->group(function () {
+Route::middleware('auth:admin')->group(function () {
     Route::get('/admins', [ViewAdminController::class, 'admins'])->name('admins');
     Route::get('/cekuser', [cekuserController::class, 'index'])->name('cekuser_admin');
 
@@ -63,8 +52,6 @@ Route::middleware('auth:admin', 'is_admin')->group(function () {
     Route::get('/detaillaporan', [laporanController::class, 'detaillaporan'])->name('detaillaporan');
 });
 
-
-
 // Guest
 
 Route::get('/', [ViewUserController::class, 'home'])->name('home');
@@ -74,6 +61,7 @@ Route::get('/custom', [ViewUserController::class, 'custom'])->name('custom_user'
 Route::get('/about', [ViewUserController::class, 'about'])->name('about_user');
 
 Route::get('/payproduk', [ViewUserController::class, 'payproduk'])->name('payproduk_user');
-Route::get('/profiluser', [customerController::class, 'index'])->name('profiluser')->middleware('auth', 'is_user');
+Route::get('/profiluser/{id}', [customerController::class, 'index'])->name('profiluser')->middleware('auth');
+Route::put('/profiluser/edit/{id}', [customerController::class, 'editprofil'])->name('profiluseredit')->middleware('auth');
 Route::get('/checkout', [checkoutController::class, 'index']);
 Route::post('/addcart', [customerController::class, 'addcart'])->name('addcart');

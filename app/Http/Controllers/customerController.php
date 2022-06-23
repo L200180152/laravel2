@@ -6,17 +6,41 @@ use Illuminate\Http\Request;
 use App\Models\detailproduk;
 use App\Models\cart;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class customerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view(
-            'customer.profil',
+        $data = User::find(Auth::user()->id)->get();
+
+        if ($data) {
+            $data = [
+                'judul' => 'Detail User | HUTS APPAREL',
+                'un_cust' => Auth::user()->un_cust,
+                'nama_cust' => Auth::user()->nama_cust,
+                'email' => Auth::user()->email,
+                'nohp_user' => Auth::user()->nohp_user,
+                'alamat_user' => Auth::user()->alamat_user,
+            ];
+            return view('customer.profil', $data);
+        }
+    }
+
+    public function editprofil(Request $request)
+    {
+        // User::where('id', Auth::user()->id)->get();
+        User::where('id', Auth::user()->id)->update(
             [
-                "judul" => "Profil User | HUTS APPAREL"
+                'un_cust' => $request->un_cust,
+                'nama_cust' => $request->nama_cust,
+                'email' => $request->email,
+                'nohp_user' => $request->nohp_user,
+                'alamat_user' => $request->alamat_user,
             ]
         );
+
+        return redirect()->route('profiluser');
     }
 
     public function addcart(Request $request)

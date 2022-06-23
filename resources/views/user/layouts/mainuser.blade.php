@@ -32,7 +32,8 @@
 
 <body style="max-width: 100%;overflow-x: hidden">
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgb(32, 63, 150)">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top"
+        style="background-color: rgb(37, 37, 37);max-height: 80px">
         <div class="container">
             <a class="navbar-brand" href="/"><img src="/img/hutsapparel.png" width="150px"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -98,7 +99,7 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                         <div class="dropdown-divider"></div>
-                                        <a href="/profiluser" class="dropdown-item d-flex">
+                                        <a href="/profiluser/{{ Auth::user()->id }}" class="dropdown-item d-flex">
                                             Profil Saya
                                         </a>
                                         <div class="dropdown-divider"></div>
@@ -113,11 +114,13 @@
                                 @else
                                     <div class="user-auth d-flex">
                                         <a href="/login"
-                                            class="text-sm text-light me-2 btn btn-success fw-bold d-flex align-items-center"><i
+                                            class="text-sm text-light me-2 fw-bold d-flex align-items-center me-4"
+                                            style="text-decoration: none;"><i
                                                 class="fa-solid fa-right-to-bracket me-2"></i>Masuk</a>
                                         @if (Route::has('register'))
                                             <a href="/register"
-                                                class="ml-4 text-sm text-light btn btn-danger fw-bold d-flex align-items-center"><i
+                                                class="ml-4 text-sm text-light fw-bold d-flex align-items-center"
+                                                style="text-decoration: none;"><i
                                                     class="fa-solid fa-user-plus me-2"></i>Daftar</a>
                                         @endif
                                     </div>

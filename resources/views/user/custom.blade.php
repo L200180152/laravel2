@@ -2,8 +2,9 @@
 
 @section('container')
     <div class="container-custom" style="max-width: 100%;overflow-x: hidden">
-        <div class="header-custom text-center">
-            <h1 style="font-weight: bold">Pesan Kaos Huts Apparel</h1>
+        <div class="container-fluid">
+            <div class="header-custom text-center">
+            </div>
         </div>
         <div class="deskripsi-pesankaos p-5">
             <h3><strong>Mohon membaca deskripsi ini sebelum memesan</strong></h3>
@@ -204,13 +205,13 @@
                                     <img src="img/pricelist/kaos.png" class="d-block img-fluid" alt="...">
                                 </div>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide="next">
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>

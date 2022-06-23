@@ -1,10 +1,11 @@
 @extends('user.layouts.mainuser')
 
 @section('container')
-    <div class="container-belanja" style="max-width: 100%;overflow-x: hidden;">
-        <div class="header-belanja text-center">
-            <h1 style="font-weight: bold">Mau memiliki salah satu produk kami?</h1>
-            <p style="font-weight: bold">Pilihlah produk-produk terbaik kami.</p>
+    <div class="container-fluid">
+        <div class="container-belanja" style="max-width: 100%;overflow-x: hidden;">
+            <div class="header-belanja text-center">
+
+            </div>
         </div>
         <div class="row p-4" style="">
             <h1 style="font-weight: bold; text-align: center">Produk</h1>
