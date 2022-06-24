@@ -9,10 +9,11 @@
         </div>
         <div class="row p-4" style="">
             <h1 style="font-weight: bold; text-align: center">Produk</h1>
-            <div class="produk-huts row row-cols-1 row-cols-md-2 g-4" style="display: flex">
+            <hr>
+            <div class="produk-huts mt-3 d-flex justify-content-center">
                 @foreach ($produk as $item)
-                    <div class="col-md-3 p-2 mt-5">
-                        <div class="card" style="">
+                    <div class="col-md-3">
+                        <div class="card border border-2 border-primary shadow-lg">
                             <form action="{{ route('addcart') }}" method="POST">
                                 <img src="./storage/img/{{ $item->img_produk }}" class="card-img-top"
                                     style="max-height: 220px;object-fit: cover;">

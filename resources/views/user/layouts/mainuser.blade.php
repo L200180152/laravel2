@@ -27,6 +27,12 @@
     {{-- <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css"> --}}
 
+    {{-- FONT --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Staatliches&display=swap" rel="stylesheet">
+
     <title>{{ $judul }}</title>
 </head>
 
@@ -44,18 +50,21 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link {{ $judul === 'Home' ? 'active' : '' }}" href="/">Beranda</a>
+                            <a class="nav-link {{ $judul === 'HUTS APPAREL' ? 'active' : '' }} "
+                                href="/">Beranda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ $judul === 'Belanja' ? 'active' : '' }} "
+                            <a class="nav-link {{ $judul === 'Belanja | HUTS APPAREL' ? 'active' : '' }} "
                                 href="/belanja">Belanja</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ $judul === 'Custom' ? 'active' : '' }}" href="/custom">Pesan
+                            <a class="nav-link {{ $judul === 'Pesan Kaos | HUTS APPAREL' ? 'active' : '' }}"
+                                href="/custom">Pesan
                                 Kaos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ $judul === 'About' ? 'active' : '' }}" href="/about">Tentang
+                            <a class="nav-link {{ $judul === 'Tentang Huts Apparel' ? 'active' : '' }}"
+                                href="/about">Tentang
                                 Kami</a>
                         </li>
                         {{-- {{ $title === 'Custom' ? 'active' : '' }} --}}

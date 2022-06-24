@@ -1,8 +1,9 @@
 @extends('user.layouts.mainuser')
 
 @section('container')
-    <div class="konten-about" style="max-width: 100%;overflow-x: hidden;margin-top: 80px; background-color: rgb(32, 63, 150)">
-        <div class="row bg-gradient p-5 text-light d-flex justify-content-center">
+    <div class="konten-about"
+        style="max-width: 100%;overflow-x: hidden;margin-top: 80px; background-color: rgb(241, 241, 241)">
+        <div class="row bg-gradient p-5 d-flex justify-content-center">
             <div class="header-tentangkami p-3 ">
                 <h1 class="text-center" style="font-weight: bold;">Huts Apparel</h1>
                 <hr class="mx-auto" style="width: 70%;">
@@ -32,19 +33,19 @@
 
                 </div>
                 <div class="col-md-4 p-3 ms-5">
-                    <form>
+                    <form onsubmit="sendEmail(); reset(); return false">
                         <div class="mb-4" style="font-weight:bold;margin-top: 70px;">
                             <div class="form-group mb-2">
-                                <label for="nama_user" class="mb-2">Nama</label>
-                                <input type="text" class="form-control" id="nama_user" placeholder="Masukkan Nama">
+                                <label for="nama_cust" class="mb-2">Nama</label>
+                                <input type="text" class="form-control" id="nama_cust" placeholder="Masukkan Nama">
                             </div>
                             <div class="form-group mb-2">
                                 <label for="email_user" class="mb-2">Email</label>
                                 <input type="email" class="form-control" id="email_user" placeholder="Masukkan Email">
                             </div>
                             <div class="form-group mb-2">
-                                <label for="pesan_user" class="mb-2">Pesan</label>
-                                <textarea name="pesan_user" class="form-control" id="pesan_user" cols="30" rows="5"
+                                <label for="pesan_cust" class="mb-2">Pesan</label>
+                                <textarea name="pesan_cust" class="form-control" id="pesan_cust" cols="30" rows="5"
                                     placeholder="Masukkan Pesan"></textarea>
                             </div>
                         </div>
@@ -60,9 +61,26 @@
 
 
     </div>
-    {{-- <h1>Halaman About</h1>
-        <h3>{{ $name }}</h3>
-        <p>{{ $email }}</p>
-        <img src="img/{{ $image }}" alt="{{ $name }}" width="200">
-    </div> --}}
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+        function sendEmail() {
+            Email.send({
+                Host: "smtp.gmail.com",
+                Username: "hutsoriginal@gmail.com",
+                Password: "Darwita123",
+                To: 'hutsoriginal@gmail.com',
+                From: document.getElementById("email"),
+                Subject: "Pesan Baru HUTS APPAREL",
+                Body: "Nama : "
+                getElementById("nama_cust").value +
+                "<br>Email : "
+                getElementById("email").value +
+                "<br>Pesan : "
+                getElementById("pesan_cust").value
+            }).then(
+                message => alert("Pesan Berhasil Terkirim")
+            );
+        }
+    </script>
 @endsection

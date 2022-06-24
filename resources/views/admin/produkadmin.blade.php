@@ -78,9 +78,13 @@
 
                                         <div class="form-group">
                                             <label for="beratproduk">Berat Produk</label>
-                                            <input type="text"
-                                                class="form-control @error('beratproduk') is-invalid @enderror"
-                                                name="beratproduk" id="beratproduk" placeholder="berat produk">
+                                            <div class="d-flex align-items-center">
+                                                <input type="text"
+                                                    class="form-control @error('beratproduk') is-invalid @enderror"
+                                                    style="max-width: 100px;margin-right: 10px;" name="beratproduk"
+                                                    id="beratproduk" placeholder="berat produk"><Strong>/Kg</Strong>
+                                            </div>
+
                                         </div>
 
                                         @error('beratproduk')
@@ -154,7 +158,7 @@
                             <td>{{ $item->nama_produk }}</td>
                             <td>{{ $item->harga_produk }}</td>
                             <td>{{ $item->desc_produk }}</td>
-                            <td>{{ $item->berat_produk }}</td>
+                            <td>{{ $item->berat_produk }} Kg</td>
                             <td>{{ $item->stok_produk }}</td>
                             <td><img style="max-width: 250px" src="./storage/img/{{ $item->img_produk }}"></td>
                             <td>

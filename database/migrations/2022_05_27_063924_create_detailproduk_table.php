@@ -18,7 +18,7 @@ class CreateDetailprodukTable extends Migration
             $table->string('nama_produk');
             $table->string('harga_produk');
             $table->string('desc_produk');
-            $table->string('berat_produk');
+            $table->float('berat_produk');
             $table->string('stok_produk');
             $table->string('img_produk');
             $table->timestamps();
