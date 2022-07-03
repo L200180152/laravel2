@@ -44,8 +44,8 @@
                             @enderror
                             <div class="mb-2">
                                 <label for="Email" class="form-label">Email</label>
-                                <input type="email" class="form-control @error('emailcust') is invalid @enderror" id="email"
-                                    name="email">
+                                <input type="email" class="form-control @error('emailcust') is invalid @enderror"
+                                    id="email" name="email">
                             </div>
                             @error('emailcust')
                                 <div class="alert alert-danger mt-2">
@@ -88,7 +88,8 @@
                             </div>
                             <center class="mt-2">
                                 <a class="me-3 btn btn-success bg-gradient fw-bold" href="/login">Masuk</a>
-                                <a class="text-center btn btn-danger bg-gradient text-light fw-bold" href="/">Kembali</a>
+                                <a class="text-center btn btn-danger bg-gradient text-light fw-bold"
+                                    href="/">Kembali</a>
                             </center>
                         </form>
                     </div>

@@ -43,8 +43,7 @@
                             <div class="form-group mb-3">
                                 <h5 for="nama_customer">Deskripsi Singkat<span class="text-danger"
                                         style="font-weight: bold;">*</span></h5>
-                                <input type="text" class="form-control" id="nama_project"
-                                    placeholder="Masukkan Deskripsi Singkat">
+                                <textarea name="nama_project" id="nama_project" class="form-control" placeholder="Masukkan Deskripsi Singkat"></textarea>
                             </div>
                             <div class="form-group mb-3">
                                 <h5 for="nama_customer">Ukuran Kaos<span class="text-danger"
@@ -99,18 +98,6 @@
                                 <h5 for="nama_customer">Deadline Produksi<span class="text-danger"
                                         style="font-weight: bold;">*</span></h5>
                                 <small>(Deadline produksi standar kami adalah 20 hari setelah semua disepakati)</small><br>
-                                {{-- <form class="row">
-                                    <label for="date" class="col-1 col-form-label">Date</label>
-                                    <div class="col-5">
-                                        <div class="input-group date" id="datepicker">
-                                            <input type="text" class="form-control" id="date" />
-                                            <span class="input-group-append">
-                                                <span class="input-group-text bg-light d-block">
-                                                    <i class="fa fa-calendar"></i>
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </div> --}}
                                 <form action="#" class="row">
                                     <div class="col-md-4">
                                         <div class="datepicker">

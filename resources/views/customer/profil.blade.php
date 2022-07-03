@@ -12,32 +12,33 @@
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center"><img class="rounded-circle mt-5" width="150px"
                         src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
-                        class="font-weight-bold">{{ $un_cust }}</span><span
-                        class="text-black-50">{{ $email }}</span><span>
+                        class="font-weight-bold">{{ Auth::user()->un_cust }}</span><span
+                        class="text-black-50">{{ Auth::user()->email }}</span><span>
                     </span></div>
             </div>
             <div class="col-md-5 border-right">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Pengaturan Profil</h4>
                 </div>
-                <form action="/profiluser/edit/{{ Auth::user()->id }}" method="POST">
+                <form action="/profiluser/edit" method="POST">
                     @csrf
                     @method('put')
                     <div class="row mt-2">
                         <div class="col-md-12"><label class="labels">Username</label><input type="text"
-                                class="form-control" placeholder="username" value="{{ $un_cust }}" id="un_cust"
-                                name="un_cust"></div>
+                                class="form-control" placeholder="username" value="{{ Auth::user()->un_cust }}"
+                                id="un_cust" name="un_cust"></div>
                         <div class="col-md-12"><label class="labels">Nama</label><input type="text" class="form-control"
-                                placeholder="nama" value="{{ $nama_cust }}" id="nama_cust" name="nama_cust"></div>
+                                placeholder="nama" value="{{ Auth::user()->nama_cust }}" id="nama_cust" name="nama_cust">
+                        </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-12"><label class="labels">Nomor HP</label><input type="text"
-                                class="form-control" placeholder="nomor hp" value="{{ $nohp_user }}" id="nohp_cust"
-                                name="nohp_cust"></div>
+                                class="form-control" placeholder="nomor hp" value="{{ Auth::user()->nohp_user }}"
+                                id="nohp_user" name="nohp_user"></div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control"
-                                placeholder="Email" value="{{ $email }}" id="email" name="email"></div>
+                                placeholder="Email" value="{{ Auth::user()->email }}" id="email" name="email"></div>
                     </div>
                     <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Simpan
                             Profil</button></div>

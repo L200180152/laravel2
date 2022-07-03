@@ -108,16 +108,23 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                                         <div class="dropdown-divider"></div>
-                                        <a href="/profiluser/{{ Auth::user()->id }}" class="dropdown-item d-flex">
+                                        <a href="/profiluser" class="dropdown-item d-flex">
                                             Profil Saya
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item btn-theme" href="/logout"
-                                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                            Log Out
+                                        <a href="#" class="dropdown-item d-flex">
+                                            Riwayat Transaksi
                                         </a>
-                                        <form id="logout-form" action="/logout" method="POST" class="d-none">
+                                        <div class="dropdown-divider"></div>
+                                        <a href="#" class="dropdown-item d-flex">
+                                            Riwayat Pesan Kaos
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <form action="/logout" method="POST">
                                             @csrf
+                                            <button class="dropdown-item btn-theme" type="submit">
+                                                Log Out
+                                            </button>
                                         </form>
                                     </div>
                                 @else

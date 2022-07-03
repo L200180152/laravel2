@@ -283,6 +283,15 @@
                             </a>
                         </li>
                         <li class="nav-item menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tshirt"></i>
+                                <p>
+                                    Proses Produksi Kaos
+                                    <i class=""></i>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item menu-open">
                             <a href="/laporan" class="nav-link">
                                 <i class="nav-icon fas fa-chart-line"></i>
                                 <p>
