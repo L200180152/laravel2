@@ -61,20 +61,6 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // $request->validate([
-        //     'nama_admin' => 'required',
-        //     'username_admin' => 'required|unique:admin,username_admin',
-        //     'password' => 'required',
-        //     'ulangpassword' => 'required|same:password'
-        // ]);
-
-        // $addadmin = admins::create([
-        //     'id_admin' => $request->id,
-        //     'nama_admin' => $request->nama_admin,
-        //     'username_admin' => $request->username_admin,
-        //     'password' => $request->password
-        // ]);
-
         if ($addadmin) {
             session()->flash('berhasil', 'Admin Berhasil ditambahkan');
             return redirect('/add-admin');

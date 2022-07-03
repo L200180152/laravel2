@@ -24,34 +24,31 @@ use PhpParser\Node\Stmt\Function_;
 |
 */
 
-
-
 require __DIR__ . '/auth.php';
 
 // Admin
-Route::domain(env('SUBDOMAIN_WAREHOUSE'))->group(function () {
-    Route::middleware('auth:admin', 'is_admin')->group(function () {
-        Route::get('/admins', [ViewAdminController::class, 'admins'])->name('admins');
-        Route::get('/cekuser', [cekuserController::class, 'index'])->name('cekuser_admin');
 
-        Route::get('/produk-adm', [produk_controller::class, 'index'])->name('rute_produkadmin');
-        Route::post('/produk-adm', [produk_controller::class, 'tambah'])->name('rute_tambahproduk');
-        Route::delete('/produk-adm/{id_produk}', [produk_controller::class, 'hapus'])->name('rute_hapusproduk');
-        Route::get('/produk-adm/{id_produk}/edit', [produk_controller::class, 'edit'])->name('rute_editproduk');
-        Route::post('/produk-adm/{id_produk}', [produk_controller::class, 'ubah'])->name('rute_updateproduk');
+Route::middleware('auth:admin')->group(function () {
+    Route::get('/admins', [ViewAdminController::class, 'admins'])->name('admins');
+    Route::get('/cekuser', [cekuserController::class, 'index'])->name('cekuser_admin');
 
+    Route::get('/produk-adm', [produk_controller::class, 'index'])->name('rute_produkadmin');
+    Route::post('/produk-adm', [produk_controller::class, 'tambah'])->name('rute_tambahproduk');
+    Route::delete('/produk-adm/{id_produk}', [produk_controller::class, 'hapus'])->name('rute_hapusproduk');
+    Route::get('/produk-adm/{id_produk}/edit', [produk_controller::class, 'edit'])->name('rute_editproduk');
+    Route::post('/produk-adm/{id_produk}', [produk_controller::class, 'ubah'])->name('rute_updateproduk');
 
-        Route::get('/transaksi', [ViewAdminController::class, 'transaksi'])->name('transaksi_admin');
+    Route::get('/transaksi', [ViewAdminController::class, 'transaksi'])->name('transaksi_admin');
 
-        Route::get('/customadmin', [ViewAdminController::class, 'customadmin'])->name('customadmin');
+    Route::get('/customadmin', [ViewAdminController::class, 'customadmin'])->name('customadmin');
 
-        Route::get('/add-admin', [ViewAdminController::class, 'addadmin'])->name('addadmin');
-        Route::post('/add-admin', [RegisterController::class, 'add_admin'])->name('tambah_admin');
+    Route::get('/add-admin', [ViewAdminController::class, 'addadmin'])->name('addadmin');
+    Route::post('/add-admin', [RegisterController::class, 'add_admin'])->name('tambah_admin');
 
-        Route::get('/laporan', [laporanController::class, 'index'])->name('laporan');
-        Route::get('/detaillaporan', [laporanController::class, 'detaillaporan'])->name('detaillaporan');
-    });
+    Route::get('/laporan', [laporanController::class, 'index'])->name('laporan');
+    Route::get('/detaillaporan', [laporanController::class, 'detaillaporan'])->name('detaillaporan');
 });
+
 
 // Guest
 
@@ -62,7 +59,8 @@ Route::get('/custom', [ViewUserController::class, 'custom'])->name('custom_user'
 Route::get('/about', [ViewUserController::class, 'about'])->name('about_user');
 
 Route::get('/payproduk', [ViewUserController::class, 'payproduk'])->name('payproduk_user');
-Route::get('/profiluser/{id}', [customerController::class, 'index'])->name('profiluser')->middleware('auth');
-Route::put('/profiluser/edit/{id}', [customerController::class, 'editprofil'])->name('profiluseredit')->middleware('auth');
+Route::get('/profiluser', [customerController::class, 'index'])->name('profiluser')->middleware('auth');
+Route::put('/profiluser/edit', [customerController::class, 'editprofil'])->name('profiluseredit')->middleware('auth');
+Route::get('/getstate', [customerController::class, 'getstate'])->name('getstate')->middleware('auth');
 Route::get('/checkout', [checkoutController::class, 'index']);
 Route::post('/addcart', [customerController::class, 'addcart'])->name('addcart');

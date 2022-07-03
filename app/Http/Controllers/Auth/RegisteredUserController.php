@@ -43,16 +43,16 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'nama_cust' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'un_cust' => ['required', 'string', 'max:20'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'un_cust' => ['required', 'string', 'max:20', 'unique:users,un_cust'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'password_confirmation' => 'required|same:password'
         ]);
 
         $user = User::create([
             'nama_cust' => $request->nama_cust,
-            'un_cust' => $request->un_cust,
-            'email' => $request->email,
+            'un_cust' => strtolower($request->un_cust),
+            'email' => strtolower($request->email),
             'password' => Hash::make($request->password),
         ]);
 

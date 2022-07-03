@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('un_cust')->nullable();
             $table->string('nama_cust');
             $table->string('email')->unique();
-            $table->string('nohp_user')->nullable();
-            $table->string('alamat_user')->nullable();
+            $table->string('nohp_cust')->nullable();
+            $table->string('alamat_cust')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

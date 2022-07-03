@@ -12,8 +12,7 @@
                     {{ session()->get('gagal') }}
                 </div>
             @endif
-            <div class="card register-form col-md-6 p-5"
-                style="background-color: rgb(255, 255, 255, 0.8);border-radius: 20px;box-shadow: 5px 7px 37px 3px rgba(0,0,0,0.36);margin-top:298px;">
+            <div class="card register-form col-md-6 p-5">
                 <div class="card-body">
                     <h1 class="card-title text-center" style="font-weight: bold;">
                         Halaman Pendaftaran
@@ -24,52 +23,56 @@
 
                             <div class="mb-2">
                                 <label for="nama_cust" class="form-label">Nama Lengkap</label>
-                                <input type="text" class="form-control @error('namacustomer') is invalid @enderror"
-                                    id="nama_cust" name="nama_cust">
+                                <input type="text" class="form-control @error('nama_cust') is invalid @enderror"
+                                    id="nama_cust" name="nama_cust" required>
                             </div>
-                            @error('namacustomer')
+                            @error('nama_cust')
                                 <div class="alert alert-danger mt-2">
-                                    {{ $message }}
+                                    <small>Lengkapi Data Nama Lengkap</small>
                                 </div>
                             @enderror
+
                             <div class="mb-2">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control @error('usernamecustomer') is invalid @enderror"
-                                    id="un_cust" name="un_cust">
+                                <input type="text" class="form-control @error('un_cust') is invalid @enderror"
+                                    id="un_cust" name="un_cust" required>
                             </div>
-                            @error('usernamecustomer')
+                            @error('un_cust')
                                 <div class="alert alert-danger mt-2">
-                                    {{ $message }}
+                                    <small>Username tidak sesuai/Username sudah tersedia</small>
                                 </div>
                             @enderror
+
                             <div class="mb-2">
                                 <label for="Email" class="form-label">Email</label>
-                                <input type="email" class="form-control @error('emailcust') is invalid @enderror"
-                                    id="email" name="email">
+                                <input type="email" class="form-control @error('email') is invalid @enderror"
+                                    id="email" name="email" required>
                             </div>
-                            @error('emailcust')
+                            @error('email')
                                 <div class="alert alert-danger mt-2">
-                                    {{ $message }}
+                                    <small>Email tidak sesuai/Email sudah tersedia</small>
                                 </div>
                             @enderror
+
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control @error('password') is invalid @enderror"
                                     id="password" name="password" required autocomplete="new-password">
                             </div>
-                            @error('password')
+                            {{-- @error('password')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
                                 </div>
-                            @enderror
+                            @enderror --}}
                             <div class="mb-3">
                                 <label for="password" class="form-label">Ulang Password</label>
-                                <input type="password" class="form-control @error('ulangpassword') is invalid @enderror"
-                                    id="password_confirmation" name="password_confirmation">
+                                <input type="password"
+                                    class="form-control @error('password_confirmation') is invalid @enderror"
+                                    id="password_confirmation" name="password_confirmation" required>
                             </div>
-                            @error('ulangpassword')
+                            @error('password_confirmation')
                                 <div class="  alert alert-danger mt-2">
-                                    {{ $message }}
+                                    <small>Password anda salah</small>
                                 </div>
                             @enderror
                             <div class="flex items-center justify-end mt-4">
