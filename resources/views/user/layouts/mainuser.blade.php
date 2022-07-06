@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -12,16 +13,10 @@
 
     <link rel="stylesheet" href="/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
-
-
     {{-- Date Picker --}}
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
-
-
     <link rel="stylesheet" href="fonts/icomoon/style.css">
-
     <link rel="stylesheet" href="css/rome.css">
 
     {{-- <!-- Bootstrap CSS -->
@@ -77,18 +72,34 @@
                             <h5><i class="fa-solid fa-cart-shopping text-light me-3 mt-2"></i></h5>
                         </a>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-left" style="right:70%; left:auto;">
-                            <span class="dropdown-item dropdown-header">1 Produk</span>
+                            {{-- <span class="dropdown-item dropdown-header">1 Produk</span> --}}
                             <div class="dropdown-divider"></div>
-                            <div class="dropdown-item d-flex flex-row">
-                                <input class="form-check-input me-2 my-auto" type="checkbox" value=""
-                                    id="flexCheckDefault">
-                                <img src="/img/belanja/1.jpg" class="img-cart me-2" style="max-width: 80px;">
-                                <h6 style="font-weight: bold">Kaos Friday</h6>
-                                <h6 style="font-weight: bold">Rp. 60.000,00-</h6>
-                                <a href="#" class="btn btn-danger m-2" style="height: 50%;"><i
-                                        class="fas fa-trash"></i></a>
-                            </div>
-                            <div class="dropdown-divider"></div>
+                            @foreach ($cart_item as $ci)
+                                <div class="dropdown-item d-flex flex-row">
+                                    <div class="col d-flex justify-items-center">
+                                        <input class="form-check-input me-2 my-auto" type="checkbox" value=""
+                                            id="flexCheckDefault">
+                                    </div>
+                                    <div class="col d-flex justify-items-center">
+                                        <img src="./storage/img/{{ $ci->img_produk }}" class="img-cart me-2"
+                                            style="max-width: 80px;">
+                                    </div>
+                                    <div class="col-sm-6 d-flex justify-content-center" style="flex-direction: column">
+                                        <small>{{ $ci->nama_produk }}</small>
+                                        <small>{{ $ci->harga_produk }}</small>
+                                    </div>
+                                    <div class="col d-flex justify-items-center">
+                                        <form action="/hapuscart" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <input type="hidden" name="id_cart" value="{{ $ci->id_cart }}">
+                                            <button type="submit" class="btn btn-danger m-2"><i
+                                                    class="fas fa-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                            @endforeach
                             <a href="/payproduk" class="btn btn-success d-flex justify-content-center">Check
                                 Out Barang</a>
                         </div>

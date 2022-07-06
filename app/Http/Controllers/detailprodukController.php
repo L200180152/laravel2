@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\detailproduk;
+use App\Models\cart;
 use Illuminate\Http\Request;
 
 class detailprodukController extends Controller
@@ -14,12 +15,14 @@ class detailprodukController extends Controller
         if ($data) {
             $data = [
                 'judul' => 'Detail Produk | HUTS APPAREL',
+                'id_produk' => $data->id_produk,
                 'nama_produk' => $data->nama_produk,
                 'desc_produk' => $data->desc_produk,
                 'berat_produk' => $data->berat_produk,
                 'stok_produk' => $data->stok_produk,
                 'harga_produk' => $data->harga_produk,
-                'img_produk' => $data->img_produk
+                'img_produk' => $data->img_produk,
+                'cart_item' => cart::all()
             ];
             return view('user.detailproduk', $data);
         } else {

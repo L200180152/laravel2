@@ -8,8 +8,10 @@ use App\Http\Controllers\laporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\produk_controller;
+use App\Http\Controllers\regioncontroller;
 use App\Http\Controllers\ViewAdminController;
 use App\Http\Controllers\ViewUserController;
+use App\Models\customer;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Stmt\Function_;
 
@@ -50,6 +52,8 @@ Route::middleware('auth:admin')->group(function () {
 });
 
 
+
+
 // Guest
 
 Route::get('/', [ViewUserController::class, 'home'])->name('home');
@@ -59,8 +63,19 @@ Route::get('/custom', [ViewUserController::class, 'custom'])->name('custom_user'
 Route::get('/about', [ViewUserController::class, 'about'])->name('about_user');
 
 Route::get('/payproduk', [ViewUserController::class, 'payproduk'])->name('payproduk_user');
-Route::get('/profiluser', [customerController::class, 'index'])->name('profiluser')->middleware('auth');
-Route::put('/profiluser/edit', [customerController::class, 'editprofil'])->name('profiluseredit')->middleware('auth');
-Route::get('/getstate', [customerController::class, 'getstate'])->name('getstate')->middleware('auth');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profiluser', [customerController::class, 'index'])->name('profiluser');
+    Route::put('/profiluser/edit', [customerController::class, 'editprofil'])->name('profiluseredit');
+    Route::get('/getstate', [customerController::class, 'getstate'])->name('getstate');
+    Route::get('/getregion', [customerController::class, 'getregion'])->name('getregion');
+    Route::post('/getkabupaten', [regioncontroller::class, 'getkabupaten'])->name('getkabupaten');
+    Route::post('/getkecamatan', [regioncontroller::class, 'getkecamatan'])->name('getkecamatan');
+    Route::post('/getdesa', [regioncontroller::class, 'getdesa'])->name('getdesa');
+});
+
+
 Route::get('/checkout', [checkoutController::class, 'index']);
 Route::post('/addcart', [customerController::class, 'addcart'])->name('addcart');
+Route::post('/addcartdetail', [customerController::class, 'addcartdetail'])->name('addcartdetail');
+Route::delete('/hapuscart', [customerController::class, 'hapuscart'])->name('hapuscart');

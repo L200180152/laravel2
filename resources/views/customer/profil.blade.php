@@ -62,45 +62,51 @@
                 <div class="row mt-5">
                     <div class="form-group col-md-6">
                         <label class="labels">Negara</label>
-                        <select name="negara" id="negara" class="form-control">
-                            <option value="">Pilih Negara</option>
-                            @foreach ($negara as $n)
-                                <option value="{{ $n->id }}">{{ $n->name }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" value="Indonesia" class="form-control" readonly>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="labels">Provinsi</label>
-                        <select name="provinsi" id="provinsi" class="form-control">
+                        <select name="provinsi_cust" id="provinsi_cust" class="form-control">
+                            @if (Auth::user()->provinsi_cust != '')
+                                <option value="{{ Auth::user()->provinsi_cust }}">{{ Auth::user()->provinsi_cust }}
+                                </option>
+                                @foreach ($provinsi as $p)
+                                    <option value="{{ $p->id }}">{{ $p->name }}</option>
+                                @endforeach
+                            @else
+                                <option>Pilih provinsi..</option>
+                                @foreach ($provinsi as $p)
+                                    <option value="{{ $p->id }}">{{ $p->name }}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="labels">Kabupaten</label>
-                        <select name="kabupaten" id="kabupaten" class="form-control">
-                            <option value="">Pilih Kabupaten</option>
+                        <select name="kabupaten_cust" id="kabupaten_cust" class="form-control">
+                            <option>{{ Auth::user()->kabupaten_cust }}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="labels">Kecamatan</label>
-                        <select name="kecamatan" id="kecamatan" class="form-control">
-                            <option value="">Pilih Kecamatan</option>
+                        <select name="kecamatan_cust" id="kecamatan_cust" class="form-control">
+                            <option>{{ Auth::user()->kecamatan_cust }}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="labels">Desa</label>
-                        <select name="desa" id="desa" class="form-control">
-                            <option value="">Pilih Desa</option>
+                        <select name="desa_cust" id="desa_cust" class="form-control">
+                            <option>{{ Auth::user()->desa_cust }}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="labels">kode pos</label>
-                        <select name="kodepos" id="kodepos" class="form-control">
-                            <option value="">Pilih Kode Pos</option>
-                        </select>
+                        <input type="text" class="form-control" placeholder="Kode Pos" name="kodepos_cust"
+                            id="kodepos_cust" value="{{ Auth::user()->kodepos_cust }}">
                     </div>
                     <div class="form-group">
                         <label class="labels">Detail Alamat</label>
-                        <textarea name="alamat_cust" id="alamat_cust" class="form-control" placeholder="Alamat">{{ Auth::user()->alamat_cust }}</textarea>
+                        <textarea name="alamat_cust" id="alamat_cust" class="form-control" placeholder="Jln/Rumah No/Rt..Rw..">{{ Auth::user()->alamat_cust }}</textarea>
                     </div>
                 </div>
             </div>
@@ -122,7 +128,7 @@
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $("#negara").change(function() {
                 let negara_id = this.value;
@@ -130,6 +136,92 @@
                     $("#provinsi").html(data);
                 })
             })
+        })
+    </script> --}}
+
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        });
+
+        $(function() {
+            $('#provinsi_cust').on('change', function() {
+                let idprovinsi = $('#provinsi_cust').val();
+
+                // console.log(idprovinsi);
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('getkabupaten') }}",
+                    data: {
+                        idprovinsi: idprovinsi
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $('#kabupaten_cust').html(msg);
+                        $('#kecamatan_cust').html('');
+                        $('#desa_cust').html('');
+
+                    },
+                    error: function(data) {
+                        console.log('error :', data);
+                    },
+                })
+
+            })
+
+            $('#kabupaten_cust').on('change', function() {
+                let idkabupaten = $('#kabupaten_cust').val();
+
+                // console.log(idkabupaten);
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('getkecamatan') }}",
+                    data: {
+                        idkabupaten: idkabupaten
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $('#kecamatan_cust').html(msg);
+                        $('#desa_cust').html('');
+
+                    },
+                    error: function(data) {
+                        console.log('error :', data);
+                    },
+                })
+
+            })
+
+            $('#kecamatan_cust').on('change', function() {
+                let idkecamatan = $('#kecamatan_cust').val();
+
+                // console.log(idkabupaten);
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('getdesa') }}",
+                    data: {
+                        idkecamatan: idkecamatan
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $('#desa_cust').html(msg);
+
+                    },
+                    error: function(data) {
+                        console.log('error :', data);
+                    },
+                })
+
+            })
+
+
         })
     </script>
 @endsection

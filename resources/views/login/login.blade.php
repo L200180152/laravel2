@@ -3,7 +3,7 @@
 @section('container')
     <div class="hero-bg-user">
         <div class="global-container" style="">
-            <div class="card login-form col-md-6 no-gutters p-5"
+            <div class="card login-form col-md-6 no-gutters p-5 mb-5" style="margin-top:130px;"
                 style="border-radius: 30px;background-color: rgb(255, 255, 255, 0.8);">
                 <div class="card-body">
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -24,13 +24,6 @@
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" required
                                     autocomplete="current-password">
-
-                                {{-- @if (Route::has('password.request'))
-                                    <a class="underline text-sm text-gray-600 hover:text-gray-900"
-                                        href="{{ route('password.request') }}">
-                                        {{ __('Lupa Kata Sandi?') }}
-                                    </a>
-                                @endif --}}
 
                             </div>
                             <div class="d-grid gap-2">

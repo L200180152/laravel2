@@ -20,6 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('nohp_cust')->nullable();
             $table->string('alamat_cust')->nullable();
+            $table->string('provinsi_cust')->nullable();
+            $table->string('kabupaten_cust')->nullable();
+            $table->string('kecamatan_cust')->nullable();
+            $table->string('desa_cust')->nullable();
+            $table->string('kodepos_cust')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

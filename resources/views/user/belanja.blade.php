@@ -12,23 +12,26 @@
             <hr>
             <div class="produk-huts mt-3 d-flex justify-content-center">
                 @foreach ($produk as $item)
-                    <div class="col-md-3">
+                    <div class="col-md-3 me-3">
                         <div class="card border border-2 border-primary shadow-lg">
-                            <form action="{{ route('addcart') }}" method="POST">
-                                <img src="./storage/img/{{ $item->img_produk }}" class="card-img-top"
-                                    style="max-height: 220px;object-fit: cover;">
-                                <div class="card-sell p-3">
-                                    <h3 class="card-title">{{ $item->nama_produk }}</h3>
-                                    <h5 class="card-price">Rp.{{ $item->harga_produk }},-</h5>
-                                    <div class="d-flex mt-3">
-                                        <a href="/detailproduk/{{ $item->id_produk }}" class="btn btn-primary me-2">Detail
-                                            Produk</a>
 
+                            <img src="./storage/img/{{ $item->img_produk }}" class="card-img-top"
+                                style="max-height: 220px;object-fit: cover;">
+                            <div class="card-sell p-3">
+                                <h3 class="card-title">{{ $item->nama_produk }}</h3>
+                                <h5 class="card-price">Rp.{{ $item->harga_produk }},-</h5>
+                                <div class="d-flex mt-3">
+                                    <a href="/detailproduk/{{ $item->id_produk }}" class="btn btn-primary me-2">Detail
+                                        Produk</a>
+                                    <form action="{{ route('addcart') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id_produk" id="id_produk"
+                                            value="{{ $item->id_produk }}">
                                         <button class="btn btn-success" type="submit">Tambah Keranjang</button>
-
-                                    </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
+
                         </div>
                     </div>
                 @endforeach

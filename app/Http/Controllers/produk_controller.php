@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\cart;
 use App\Models\detailproduk;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class produk_controller extends Controller
     {
         $data = [
             'judul' => 'Produk Admin',
-            'detailproduk' => detailproduk::all()
+            'detailproduk' => detailproduk::all(),
         ];
         return view('admin.produkadmin', $data);
     }
@@ -23,8 +24,8 @@ class produk_controller extends Controller
 
         $data = [
             'judul' => 'Belanja | HUTS APPAREL',
-            'produk' => detailproduk::all()
-
+            'produk' => detailproduk::all(),
+            'cart_item' => cart::all()
         ];
 
         return view('user.belanja', $data);

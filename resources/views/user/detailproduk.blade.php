@@ -20,7 +20,11 @@
                             <h1>Rp. {{ $harga_produk }}</h1>
                         </div>
                         <div class="tombol">
-                            <a class="btn btn-secondary p-3 my-2" href="{{ route('addcart') }}">Tambahkan ke Keranjang</a>
+                            <form action="{{ route('addcartdetail') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id_produk" id="id_produk" value="{{ $id_produk }}">
+                                <button class="btn btn-secondary" type="submit">Tambah Keranjang</button>
+                            </form>
                             <a class="btn btn-success p-3 my-2" href="#">Beli Sekarang</a>
                         </div>
                         </p>

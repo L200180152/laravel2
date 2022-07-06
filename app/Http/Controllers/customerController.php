@@ -10,54 +10,27 @@ use App\Models\provinsi;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
+use App\Models\Province;
+
+
+// Get semua data
+
 
 class customerController extends Controller
 {
     public function index()
     {
-        // $data = User::find(Auth::user()->id)->get();
-
-        // if ($data) {
         $data = [
             'judul' => 'Profil User | HUTS APPAREL',
             User::find(Auth::user()->id)->get(),
-            'negara' => negara::all()
+            'provinsi' => Province::all(),
+            'cart_item' => cart::all()
         ];
         return view('customer.profil', $data);
     }
 
-    public function getstate()
-    {
-        $negara_id = request('negara');
-
-        $provinsi = provinsi::where('negara_id', $negara_id)->get();
-        $option = "<option value=''>Pilih Provinsi</option>";
-        foreach ($provinsi as $p) {
-            $option .= '<option value="' . $p->name . '">' . $p->name . '</option>';
-        }
-        return $option;
-    }
     public function editprofil()
     {
-
-        // request()->validate([
-        //     'un_cust' => ['required', 'string', 'max:20'],
-        //     'nama_cust' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:20', 'unique:users'],
-        //     'nohp_cust' => ['string', 'max:12'],
-        //     'alamat_cust' => ['string', 'max:255']
-        // ]);
-
-        // $editprofil = User::where('id', Auth::user()->id)->update(
-        //     [
-        //         'un_cust' => request()->un_cust,
-        //         'nama_cust' => request()->nama_cust,
-        //         'email' => request()->email,
-        //         'nohp_cust' => request()->nohp_cust,
-        //         'alamat_cust' => request()->alamat_cust,
-        //     ]
-        // );
-
         $editprofil = User::where('id', Auth::user()->id)->update(
             [
                 'un_cust' => strtolower(request()->un_cust),
@@ -65,6 +38,11 @@ class customerController extends Controller
                 'email' => strtolower(request()->email),
                 'nohp_cust' => request()->nohp_cust,
                 'alamat_cust' => ucfirst(request()->alamat_cust),
+                'provinsi_cust' => request()->provinsi_cust,
+                'kabupaten_cust' => request()->kabupaten_cust,
+                'kecamatan_cust' => request()->kecamatan_cust,
+                'desa_cust' => request()->desa_cust,
+                'kodepos_cust' => request()->kodepos_cust
             ]
         );
 
@@ -77,44 +55,53 @@ class customerController extends Controller
             session()->flash('gagal', 'Data Gagal Diubah!');
             return redirect()->route('profiluser');
         }
-        // if ($editprofil) {
-        //     redirect()->route('profiluser')->with('berhasil', 'Data Berhasil DiUbah');
-        // } else {
-        //     redirect()->route('profiluser')->with('gagal', 'Data Gagal DiUbah');
-        // }
-    }
-
-    public function editalamat()
-    {
-        # code...
     }
 
     public function addcart(Request $request)
     {
-
-        detailproduk::where('id_produk', $request->id_produk)->get(
-            [
-                'nama_produk' => $request->nama_produk,
-                'harga_produk' => $request->harga_produk,
-                // 'img_produk' => $gambar->hashName()
-                'img_produk' => $request->img_produk
-            ]
-        );
-
         //insert post
+        $produk = detailproduk::where('id_produk', $request->id_produk)->first();
+        // dd($produk);
         $cart = cart::create([
             'id_cart' => $request->id_cart,
-            // 'id_cust' => $request->id_cust,
-            // 'nama_cust' => $request->nama_cust,
-            'nama_produk' => $request->nama_produk,
-            'harga_produk' => $request->harga_produk,
-            'img_produk' => $request->img_produk
+            // 'id_cust' => Auth::user()->id,
+            // 'nama_cust' => Auth::user()->nama_cust,
+            'nama_produk' => $produk->nama_produk,
+            'harga_produk' => $produk->harga_produk,
+            'img_produk' => $produk->img_produk
         ]);
 
         if ($cart) {
-            return redirect()->route('rute_produkadmin')->with(['Success' => 'Data Berhasil Ditambahkan']);
+            return redirect('/belanja')->with(['Success' => 'Data Berhasil Ditambahkan']);
         } else {
-            return redirect()->route('rute_produkadmin')->with(['Error' => 'Data Gagal Ditambahkan']);
+            return redirect('/belanja')->with(['Error' => 'Data Gagal Ditambahkan']);
         }
+    }
+
+    public function addcartdetail(Request $request)
+    {
+        //insert post
+        $produk = detailproduk::where('id_produk', $request->id_produk)->get();
+        // dd($produk);
+        $cart = cart::create([
+            'id_cart' => $request->id_cart,
+            // 'id_cust' => Auth::user()->id,
+            // 'nama_cust' => Auth::user()->nama_cust,
+            'nama_produk' => $produk->nama_produk,
+            'harga_produk' => $produk->harga_produk,
+            'img_produk' => $produk->img_produk
+        ]);
+
+        if ($cart) {
+            return redirect()->route('detail_produk')->with(['Success' => 'Data Berhasil Ditambahkan']);
+        } else {
+            return redirect()->route('detail_produk')->with(['Error' => 'Data Gagal Ditambahkan']);
+        }
+    }
+
+    public function hapuscart(Request $request)
+    {
+        cart::where('id_cart', $request->id_cart)->delete();
+        return redirect('/belanja')->with(['Success' => 'Data Berhasil Dihapus']);
     }
 }
