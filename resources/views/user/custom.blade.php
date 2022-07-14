@@ -49,40 +49,31 @@
                                 <h5 for="nama_customer">Ukuran Kaos<span class="text-danger"
                                         style="font-weight: bold;">*</span>></h5>
                                 <ul class="list-group mt-2">
-                                    <li class="list-group-item d-flex">
+                                    {{-- <li class="list-group-item d-flex align-items-center">
                                         <input class="form-check-input me-1" type="checkbox" value="">
                                         Small (45 x 67)
-                                        <input type="number" name="jmlpesanan" id="jmlpesanan1" onchange="edit(this.value)"
-                                            class="ms-2" style="width:50px;">
-                                    </li>
-                                    <li class="list-group-item">
+                                        <input type="number" name="uk_S" id="uk_M" value="0"
+                                            onchange="edit(this.value)" class="ms-2" style="width:50px;">
+                                    </li> --}}
+                                    <li class="list-group-item d-flex align-items-center">
                                         <input class="form-check-input me-1" type="checkbox" value="">
-                                        Medium (48 x 69) <input type="number" name="jmlpesanan" id="jmlpesanan2"
-                                            class="ms-2" style="width:50px;">
+                                        Medium (48 x 69)
+                                        <input type="number" name="uk_M" id="uk_M" class="ms-2"
+                                            style="width:50px;" onchange="edit(this.value)" value="0">
+
                                     </li>
-                                    <li class="list-group-item">
+                                    <li class="list-group-item d-flex align-items-center">
                                         <input class="form-check-input me-1" type="checkbox" value="">
                                         Large (52 x 73)
-                                        <input type="number" name="jmlpesanan" id="jmlpesanan3" class="ms-2"
-                                            style="width:50px;">
+                                        <input type="number" name="uk_L" id="uk_L" class="ms-2" uk_XL
+                                            style="width:50px;" onchange="edit(this.value)" value="0">
+
                                     </li>
-                                    <li class="list-group-item">
+                                    <li class="list-group-item d-flex align-items-center">
                                         <input class="form-check-input me-1" type="checkbox" value="">
-                                        X Large (54 x 75)(+Rp 5.000)
-                                        <input type="number" name="jmlpesanan" id="jmlpesanan" class="ms-2"
-                                            style="width:50px;">
-                                    </li>
-                                    <li class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="">
-                                        XX Large (57 x 77)(+Rp 10.000)
-                                        <input type="number" name="jmlpesanan" id="jmlpesanan" class="ms-2"
-                                            style="width:50px;">
-                                    </li>
-                                    <li class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox" value="">
-                                        XXX Large (60 x 80)(+Rp 10.000)
-                                        <input type="number" name="jmlpesanan" id="jmlpesanan" class="ms-2"
-                                            style="width:50px;">
+                                        X Large (54 x 75)
+                                        <input type="number" name="uk_XL" id="uk_XL" class="ms-2"
+                                            style="width:50px;" value="0">
                                     </li>
                                 </ul>
                             </div>
@@ -91,8 +82,10 @@
                                         style="font-weight: bold;">*</span></h5>
                                 <small>(Jika tidak mempunyai desain bisa order desain melalui contact yang
                                     tertera)</small><br>
-                                <button type="button" class="btn btn-block bg-primary bg-gradient btn-lg text-light">Upload
+                                <button type="file" class="btn btn-block bg-primary bg-gradient btn-lg text-light"
+                                    webkitdirectory>Upload
                                     File</button>
+                                <input id="input-folder" type="file" webkitdirectory>
                             </div>
                             <div class="form-group mb-3">
                                 <h5 for="nama_customer">Deadline Produksi<span class="text-danger"
@@ -112,17 +105,17 @@
                                 <h5 for="nama_customer">Lengan Kaos<span class="text-danger"
                                         style="font-weight: bold;">*</span>></h5>
                                 <ul class="list-group mt-2">
-                                    <li class="list-group-item">
+                                    <li class="list-group-item d-flex align-items-center">
                                         <input class="form-check-input me-1" type="checkbox" value="">
                                         Lengan Pendek
-                                        <input type="number" name="jmlpesanan" id="jmlpesanan" class="ms-2"
-                                            style="width:50px;">
+                                        <input type="number" name="lgnkaospndk" id="lgnkaospndk" class="ms-2"
+                                            style="width:50px;" value="0">
                                     </li>
-                                    <li class="list-group-item">
+                                    <li class="list-group-item d-flex align-items-center">
                                         <input class="form-check-input me-1" type="checkbox" value="">
                                         Lengan Panjang (+Rp5.000)
-                                        <input type="number" name="jmlpesanan" id="jmlpesanan" class="ms-2"
-                                            style="width:50px;">
+                                        <input type="number" name="lgnkaospnjg" id="lgnkaospnjg" class="ms-2"
+                                            style="width:50px;" value="0">
                                     </li>
                                 </ul>
                             </div>
@@ -158,14 +151,13 @@
                             <tr>
                                 <td style="font-weight:bold">Jumlah</td>
                                 <td></td>
-                                <td>: 24</td>
+                                <td>: 0</td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td style="font-weight:bold">Total Harga</td>
                                 <input type="hidden" id="total_harga" value="1400000">
-
-                                <td id="display_total">: Rp. 1.440.000,00</td>
+                                <td id="display_total">0</td>
                             </tr>
                         </tbody>
                     </table>
@@ -173,6 +165,7 @@
                         <a href="#" onclick="konfirm()"
                             class="konfirmasi-custom btn btn-primary bg-gradient p-3 m-2">Konfirmasi Pesanan</a>
                     </div>
+                    <input type="hidden">
                     {{-- Carousel --}}
                     <div class="carousel-pricelist">
                         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -219,8 +212,8 @@
         }
 
         function konfirm() {
-            var y = document.getElementById('jmlpesanan1').value + document.getElementById('jmlpesanan2').value +
-                document.getElementById('jmlpesanan3').value;
+            var y = document.getElementById('uk_M').value + document.getElementById('uk_L').value +
+                document.getElementById('uk_XL').value;
             console.log(y);
             if (y < 24) {
                 alert("Minimal 24");
@@ -229,6 +222,13 @@
 
         $(function() {
             $('#datepicker').datepicker();
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#input-folder-1").fileinput({
+                browseLabel: 'Select Folder...'
+            });
         });
     </script>
 @endsection

@@ -11,7 +11,6 @@ use App\Http\Controllers\produk_controller;
 use App\Http\Controllers\regioncontroller;
 use App\Http\Controllers\ViewAdminController;
 use App\Http\Controllers\ViewUserController;
-use App\Http\Controllers\GoogleController;
 use App\Models\customer;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Stmt\Function_;
@@ -29,7 +28,7 @@ use PhpParser\Node\Stmt\Function_;
 
 require __DIR__ . '/auth.php';
 
-Route::get('google-autocomplete', [GoogleController::class, 'index']);
+
 // Admin
 
 Route::middleware('auth:admin')->group(function () {
