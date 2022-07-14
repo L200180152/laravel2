@@ -6,31 +6,33 @@
         <div class="card" style="margin-bottom: 150px;">
             <div class="card-body d-flex">
                 <div class="col">
-                    <p class="card-text">
-                    <h1>{{ $nama_produk }}</h1>
-                    <small>Deskripsi Produk
-                        {{ $desc_produk }}
-                    </small>
+                    <h3>{{ $produk->nama_produk }}</h3>
+                    <h5>
+                        {{ $produk->desc_produk }}
+                    </h5>
                     <h3>Berat Barang</h3>
-                    <small>{{ $berat_produk }} Kg</small><strong>
-                        <h3>Stok Produk</h3>
-                        <small>{{ $stok_produk }}</small>
-                        <div class="harga text-white d-flex align-items-center pt-2 ps-2"
-                            style="margin-right: 20px;background-color: darkslategray;">
-                            <h1>Rp. {{ $harga_produk }}</h1>
-                        </div>
-                        <div class="tombol">
-                            <form action="{{ route('addcartdetail') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="id_produk" id="id_produk" value="{{ $id_produk }}">
-                                <button class="btn btn-secondary" type="submit">Tambah Keranjang</button>
-                            </form>
-                            <a class="btn btn-success p-3 my-2" href="#">Beli Sekarang</a>
-                        </div>
-                        </p>
+                    <h5>{{ $produk->berat_produk }} Kg</h5>
+                    <h3>Stok Produk</h3>
+                    <h5>{{ $produk->stok_produk }}</h5>
+                    <div class="harga text-white d-flex align-items-center pt-2 ps-2"
+                        style="margin-right: 20px;background-color: darkslategray;">
+                        <h1>Rp. {{ $produk->harga_produk }}</h1>
+                    </div>
+                    <div class="col d-flex">
+                        <form action="/addcartdetail" method="POST">
+                            @csrf
+                            <input type="hidden" name="id_produk" id="id_produk" value="{{ $produk->id_produk }}">
+                            <button class="btn btn-secondary p-3 my-2 me-3" type="submit">Tambah Keranjang</button>
+                        </form>
+                        <form action="#" method="POST">
+                            @csrf
+                            <input type="hidden" name="id_produk" id="id_produk" value="{{ $produk->id_produk }}">
+                            <button class="btn btn-success p-3 my-2" type="submit">Beli Sekarang</button>
+                        </form>
+                    </div>
                 </div>
                 <div class="col">
-                    <img src="/storage/img/{{ $img_produk }}" class="img-responsive detailproduk_img"
+                    <img src="/storage/img/{{ $produk->img_produk }}" class="img-responsive detailproduk_img"
                         style="max-width: 600px;">
 
                 </div>

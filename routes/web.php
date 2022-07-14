@@ -11,6 +11,7 @@ use App\Http\Controllers\produk_controller;
 use App\Http\Controllers\regioncontroller;
 use App\Http\Controllers\ViewAdminController;
 use App\Http\Controllers\ViewUserController;
+use App\Http\Controllers\GoogleController;
 use App\Models\customer;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Stmt\Function_;
@@ -28,6 +29,7 @@ use PhpParser\Node\Stmt\Function_;
 
 require __DIR__ . '/auth.php';
 
+Route::get('google-autocomplete', [GoogleController::class, 'index']);
 // Admin
 
 Route::middleware('auth:admin')->group(function () {
@@ -59,6 +61,7 @@ Route::middleware('auth:admin')->group(function () {
 Route::get('/', [ViewUserController::class, 'home'])->name('home');
 Route::get('/belanja', [produk_controller::class, 'indexUser'])->name('rute_daftar_produk');
 Route::get('/detailproduk/{id_produk}', [detailprodukController::class, 'index'])->name('detail_produk');
+// Route::post('/detailproduk/{id_produk}/addcart', [detailprodukController::class, 'addcart'])->name('addcartdetail');
 Route::get('/custom', [ViewUserController::class, 'custom'])->name('custom_user');
 Route::get('/about', [ViewUserController::class, 'about'])->name('about_user');
 

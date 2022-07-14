@@ -6,6 +6,7 @@ use App\Models\cart;
 use App\Models\detailproduk;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class produk_controller extends Controller
@@ -25,7 +26,8 @@ class produk_controller extends Controller
         $data = [
             'judul' => 'Belanja | HUTS APPAREL',
             'produk' => detailproduk::all(),
-            'cart_item' => cart::all()
+            // 'cart_item' => cart::where('id', Auth::user()->id)->get()
+            'cart_item' => cart::where('id', Auth::check() ? Auth::user()->id : null)->get()
         ];
 
         return view('user.belanja', $data);

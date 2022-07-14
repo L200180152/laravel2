@@ -64,8 +64,8 @@ class customerController extends Controller
         // dd($produk);
         $cart = cart::create([
             'id_cart' => $request->id_cart,
-            // 'id_cust' => Auth::user()->id,
-            // 'nama_cust' => Auth::user()->nama_cust,
+            'id' => Auth::user()->id,
+            'id_produk' => $produk->id_produk,
             'nama_produk' => $produk->nama_produk,
             'harga_produk' => $produk->harga_produk,
             'img_produk' => $produk->img_produk
@@ -81,21 +81,21 @@ class customerController extends Controller
     public function addcartdetail(Request $request)
     {
         //insert post
-        $produk = detailproduk::where('id_produk', $request->id_produk)->get();
+        $produk = detailproduk::where('id_produk', $request->id_produk)->first();
         // dd($produk);
         $cart = cart::create([
             'id_cart' => $request->id_cart,
-            // 'id_cust' => Auth::user()->id,
-            // 'nama_cust' => Auth::user()->nama_cust,
+            'id' => Auth::user()->id,
+            'id_produk' => $produk->id_produk,
             'nama_produk' => $produk->nama_produk,
             'harga_produk' => $produk->harga_produk,
             'img_produk' => $produk->img_produk
         ]);
 
         if ($cart) {
-            return redirect()->route('detail_produk')->with(['Success' => 'Data Berhasil Ditambahkan']);
+            return redirect('./detailproduk/' . $produk->id_produk)->with(['Success' => 'Data Berhasil Ditambahkan']);
         } else {
-            return redirect()->route('detail_produk')->with(['Error' => 'Data Gagal Ditambahkan']);
+            return redirect('./detailproduk/' . $produk->id_produk)->with(['Error' => 'Data Gagal Ditambahkan']);
         }
     }
 

@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\LoginRequestAdmin;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\cart;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -21,7 +22,8 @@ class AuthenticatedSessionController extends Controller
     {
         // return view('auth.login');
         return view('login.login', [
-            "judul" => "Halaman Login"
+            "judul" => "Halaman Login",
+            'cart_item' => cart::where('id', Auth::check() ? Auth::user()->id : null)->get()
         ]);
     }
 

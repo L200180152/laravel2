@@ -61,48 +61,54 @@
                                 href="/about">Tentang
                                 Kami</a>
                         </li>
-                        {{-- {{ $title === 'Custom' ? 'active' : '' }} --}}
                     </ul>
                 </div>
             </div>
             <div class="icon">
                 <ul class="navbar-nav dropdown">
                     <li class="navbar-item">
-                        <a class="nav-link" href="#" data-bs-toggle="dropdown">
-                            <h5><i class="fa-solid fa-cart-shopping text-light me-3 mt-2"></i></h5>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-left" style="right:70%; left:auto;">
-                            {{-- <span class="dropdown-item dropdown-header">1 Produk</span> --}}
-                            <div class="dropdown-divider"></div>
-                            @foreach ($cart_item as $ci)
-                                <div class="dropdown-item d-flex flex-row">
-                                    <div class="col d-flex justify-items-center">
-                                        <input class="form-check-input me-2 my-auto" type="checkbox" value=""
-                                            id="flexCheckDefault">
-                                    </div>
-                                    <div class="col d-flex justify-items-center">
-                                        <img src="./storage/img/{{ $ci->img_produk }}" class="img-cart me-2"
-                                            style="max-width: 80px;">
-                                    </div>
-                                    <div class="col-sm-6 d-flex justify-content-center" style="flex-direction: column">
-                                        <small>{{ $ci->nama_produk }}</small>
-                                        <small>{{ $ci->harga_produk }}</small>
-                                    </div>
-                                    <div class="col d-flex justify-items-center">
-                                        <form action="/hapuscart" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <input type="hidden" name="id_cart" value="{{ $ci->id_cart }}">
-                                            <button type="submit" class="btn btn-danger m-2"><i
-                                                    class="fas fa-trash"></i></button>
-                                        </form>
-                                    </div>
-                                </div>
+                        @if (Auth::check())
+                            <a class="nav-link" href="#" data-bs-toggle="dropdown">
+                                <h5><i class="fa-solid fa-cart-shopping text-light mt-2"></i></h5>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-left"
+                                style="right:70%; left:auto;">
                                 <div class="dropdown-divider"></div>
-                            @endforeach
-                            <a href="/payproduk" class="btn btn-success d-flex justify-content-center">Check
-                                Out Barang</a>
-                        </div>
+                                @foreach ($cart_item as $ci)
+                                    <div class="dropdown-item d-flex flex-row">
+                                        <div class="col d-flex justify-items-center">
+                                            <input class="form-check-input me-2 my-auto" type="checkbox" value=""
+                                                id="flexCheckDefault">
+                                        </div>
+                                        <div class="col d-flex justify-items-center">
+                                            <img src="./storage/img/{{ $ci->img_produk }}" class="img-cart me-2"
+                                                style="max-width: 80px;">
+                                        </div>
+                                        <div class="col-sm-6 d-flex justify-content-center"
+                                            style="flex-direction: column">
+                                            <small>{{ $ci->nama_produk }}</small>
+                                            <small>{{ $ci->harga_produk }}</small>
+                                        </div>
+                                        <div class="col d-flex justify-items-center">
+                                            <form action="/hapuscart" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <input type="hidden" name="id_cart" value="{{ $ci->id_cart }}">
+                                                <button type="submit" class="btn btn-danger m-2"><i
+                                                        class="fas fa-trash"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                <div class="dropdown-divider"></div>
+                                <a href="/payproduk" class="btn btn-success d-flex justify-content-center">Check
+                                    Out Barang</a>
+                            </div>
+                        @else
+                            <a class="nav-link" href="/login">
+                                <h5><i class="fa-solid fa-cart-shopping text-light mt-2"></i></h5>
+                            </a>
+                        @endif
                     </li>
                 </ul>
             </div>
@@ -113,7 +119,8 @@
                         @if (Route::has('login'))
                             <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                                 @auth
-                                    <a class="nav-link d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+                                    <a class="nav-link d-flex align-items-center" href="#"
+                                        data-bs-toggle="dropdown">
                                         {{ Auth::user()->un_cust }} <i class="ms-2 fa-solid fa-angle-down"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -153,27 +160,12 @@
                                 @endauth
                             </div>
                         @endif
-
                     </li>
                 </ul>
             </div>
-            {{-- INI PROFIL AKUN --}}
-            {{-- @if (Route::has('login'))
-                    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                        @auth
-                            <a href="{{ url('/dashboard') }}"
-                                class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-                        @else
-                            <a href="{{ route('login') }}"
-                                class="text-sm text-gray-700 dark:text-gray-500 underline text-light">Masuk</a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
-                                    class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline text-light">Daftar</a>
-                            @endif
-                        @endauth
-                    </div>
-                @endif --}}
         </div>
+
+
     </nav>
 
 

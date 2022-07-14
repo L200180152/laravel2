@@ -8,31 +8,14 @@ use Illuminate\Http\Request;
 
 class detailprodukController extends Controller
 {
-    public function index($id_produk)
+    public function index(Request $request)
     {
-        $data = detailproduk::where('id_produk', $id_produk)->first();
-
-        if ($data) {
-            $data = [
-                'judul' => 'Detail Produk | HUTS APPAREL',
-                'id_produk' => $data->id_produk,
-                'nama_produk' => $data->nama_produk,
-                'desc_produk' => $data->desc_produk,
-                'berat_produk' => $data->berat_produk,
-                'stok_produk' => $data->stok_produk,
-                'harga_produk' => $data->harga_produk,
-                'img_produk' => $data->img_produk,
-                'cart_item' => cart::all()
-            ];
-            return view('user.detailproduk', $data);
-        } else {
-            // Jika Produk tidak ada maka akan tampil halaman error
-            return abort('404');
-        }
-
-
-        // return view('user.detailproduk', [
-        //     "judul" => "Detail Produk"
-        // ]);
+        $data = [
+            'judul' => 'Detail Produk | HUTS APPAREL',
+            'produk' => detailproduk::where('id_produk', $request->id_produk)->first(),
+            'cart_item' => cart::all()
+        ];
+        // dd($data);
+        return view('user.detailproduk', $data);
     }
 }

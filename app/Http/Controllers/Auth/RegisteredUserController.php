@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Models\cart;
 
 class RegisteredUserController extends Controller
 {
@@ -27,7 +28,8 @@ class RegisteredUserController extends Controller
     public function create()
     {
         return view('login.register', [
-            'judul' => 'Halaman Register'
+            'judul' => 'Halaman Register',
+            'cart_item' => cart::where('id', Auth::check() ? Auth::user()->id : null)->get()
         ]);
     }
 
