@@ -165,7 +165,7 @@
                         <a href="#" onclick="konfirm()"
                             class="konfirmasi-custom btn btn-primary bg-gradient p-3 m-2">Konfirmasi Pesanan</a>
                     </div>
-                    <input type="hidden">
+
                     {{-- Carousel --}}
                     <div class="carousel-pricelist">
                         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
