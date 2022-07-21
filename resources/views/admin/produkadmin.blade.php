@@ -162,19 +162,16 @@
                             <td>{{ $item->stok_produk }}</td>
                             <td><img style="max-width: 250px" src="./storage/img/{{ $item->img_produk }}"></td>
                             <td>
-
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                <button type="button" class="btn btn-primary mb-2" data-toggle="modal"
                                     data-target="#dataproduk{{ $item->id_produk }}">
                                     Edit
                                 </button>
                                 <!-- Modal -->
-
                                 <div class="modal fade" id="dataproduk{{ $item->id_produk }}" tabindex="-1"
                                     role="dialog" aria-labelledby="dataprodukLabel" aria-hidden="true">
                                     <form action="/produk-adm/{{ $item->id_produk }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
-
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -195,8 +192,7 @@
                                                             <label for="namaproduk">Nama Produk</label>
                                                             <input type="text" class="form-control"
                                                                 id="updatenamaproduk" placeholder="nama produk"
-                                                                name="updatenamaproduk"
-                                                                value="{{ $item->nama_produk }}">
+                                                                name="updatenamaproduk" value="{{ $item->nama_produk }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="hargaproduk">Harga</label>
@@ -221,8 +217,7 @@
                                                             <label for="stokproduk">Stok</label>
                                                             <input type="text" class="form-control"
                                                                 id="updatestokproduk" placeholder="stok produk"
-                                                                name="updatestokproduk"
-                                                                value="{{ $item->stok_produk }}">
+                                                                name="updatestokproduk" value="{{ $item->stok_produk }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="updategambar">Upload Gambar</label>

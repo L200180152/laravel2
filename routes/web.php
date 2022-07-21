@@ -11,6 +11,7 @@ use App\Http\Controllers\produk_controller;
 use App\Http\Controllers\regioncontroller;
 use App\Http\Controllers\ViewAdminController;
 use App\Http\Controllers\ViewUserController;
+use App\Http\Controllers\pesankaoscontroller;
 use App\Models\customer;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Stmt\Function_;
@@ -44,6 +45,9 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/transaksi', [ViewAdminController::class, 'transaksi'])->name('transaksi_admin');
 
     Route::get('/customadmin', [ViewAdminController::class, 'customadmin'])->name('customadmin');
+    Route::get('/customadmin/{id}', [ViewAdminController::class, 'detailpesankaos'])->name('detailpesankaos');
+    Route::put('/customadmin/konfirmasi/{id}', [pesankaoscontroller::class, 'konfirmasipesankaos'])->name('konfirmasipesankaos');
+    Route::post('/customadmin/hpspesankaos', [pesankaosController::class, 'hpspesankaos'])->name('hpspesankaos');
 
     Route::get('/add-admin', [ViewAdminController::class, 'addadmin'])->name('addadmin');
     Route::post('/add-admin', [RegisterController::class, 'add_admin'])->name('tambah_admin');
@@ -52,32 +56,31 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/detaillaporan', [laporanController::class, 'detaillaporan'])->name('detaillaporan');
 });
 
-
-
-
 // Guest
+Route::domain('hutsapparel.test')->group(function () {
+    Route::get('/', [ViewUserController::class, 'home'])->name('home');
+    Route::get('/belanja', [produk_controller::class, 'indexUser'])->name('rute_daftar_produk');
+    Route::get('/detailproduk/{id_produk}', [detailprodukController::class, 'index'])->name('detail_produk');
+    // Route::post('/detailproduk/{id_produk}/addcart', [detailprodukController::class, 'addcart'])->name('addcartdetail');
+    Route::get('/custom', [ViewUserController::class, 'custom'])->name('custom_user');
 
-Route::get('/', [ViewUserController::class, 'home'])->name('home');
-Route::get('/belanja', [produk_controller::class, 'indexUser'])->name('rute_daftar_produk');
-Route::get('/detailproduk/{id_produk}', [detailprodukController::class, 'index'])->name('detail_produk');
-// Route::post('/detailproduk/{id_produk}/addcart', [detailprodukController::class, 'addcart'])->name('addcartdetail');
-Route::get('/custom', [ViewUserController::class, 'custom'])->name('custom_user');
-Route::get('/about', [ViewUserController::class, 'about'])->name('about_user');
+    Route::get('/about', [ViewUserController::class, 'about'])->name('about_user');
 
-Route::get('/payproduk', [ViewUserController::class, 'payproduk'])->name('payproduk_user');
+    Route::get('/payproduk', [ViewUserController::class, 'payproduk'])->name('payproduk_user');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profiluser', [customerController::class, 'index'])->name('profiluser');
-    Route::put('/profiluser/edit', [customerController::class, 'editprofil'])->name('profiluseredit');
-    Route::get('/getstate', [customerController::class, 'getstate'])->name('getstate');
-    Route::get('/getregion', [customerController::class, 'getregion'])->name('getregion');
-    Route::post('/getkabupaten', [regioncontroller::class, 'getkabupaten'])->name('getkabupaten');
-    Route::post('/getkecamatan', [regioncontroller::class, 'getkecamatan'])->name('getkecamatan');
-    Route::post('/getdesa', [regioncontroller::class, 'getdesa'])->name('getdesa');
+    Route::middleware('auth')->group(function () {
+        Route::get('/profiluser', [customerController::class, 'index'])->name('profiluser');
+        Route::put('/profiluser/edit', [customerController::class, 'editprofil'])->name('profiluseredit');
+        Route::get('/getstate', [customerController::class, 'getstate'])->name('getstate');
+        Route::get('/getregion', [customerController::class, 'getregion'])->name('getregion');
+        Route::post('/getkabupaten', [regioncontroller::class, 'getkabupaten'])->name('getkabupaten');
+        Route::post('/getkecamatan', [regioncontroller::class, 'getkecamatan'])->name('getkecamatan');
+        Route::post('/getdesa', [regioncontroller::class, 'getdesa'])->name('getdesa');
+        Route::post('/pesankaos', [pesankaoscontroller::class, 'pesankaos'])->name('pesankaos');
+        Route::get('/customtransaksi', [ViewUserController::class, 'customtransaksi'])->name('customtransaksi');
+    });
+    Route::get('/checkout', [checkoutController::class, 'index']);
+    Route::post('/addcart', [customerController::class, 'addcart'])->name('addcart');
+    Route::post('/addcartdetail', [customerController::class, 'addcartdetail'])->name('addcartdetail');
+    Route::delete('/hapuscart', [customerController::class, 'hapuscart'])->name('hapuscart');
 });
-
-
-Route::get('/checkout', [checkoutController::class, 'index']);
-Route::post('/addcart', [customerController::class, 'addcart'])->name('addcart');
-Route::post('/addcartdetail', [customerController::class, 'addcartdetail'])->name('addcartdetail');
-Route::delete('/hapuscart', [customerController::class, 'hapuscart'])->name('hapuscart');

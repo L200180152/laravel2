@@ -15,6 +15,7 @@ class CreatePesankaosTable extends Migration
     {
         Schema::create('pesankaos', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_cust');
             $table->string('namaproject');
             $table->string('desksingkat');
             $table->integer('uk_M');
@@ -22,9 +23,11 @@ class CreatePesankaosTable extends Migration
             $table->integer('uk_XL');
             $table->integer('lgnkaospndk');
             $table->integer('lgnkaospnjg');
-            $table->string('nohp_user');
+            $table->string('nohp_cust');
+            $table->date('dlproduksi')->nullable();
+            $table->string('jenissablon')->nullable();
             $table->string('FD_custom')->nullable();
-            $table->string('totalbayar');
+            $table->string('totalbayar')->nullable();
             $table->timestamps();
         });
     }

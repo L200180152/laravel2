@@ -53,8 +53,8 @@
                         </div>
                         <div class="form-group">
                             <label class="labels">Email</label>
-                            <input type="text" class="form-control" placeholder="Email"
-                                value="{{ Auth::user()->email }}" id="email" name="email">
+                            <input type="text" class="form-control" placeholder="Email" value="{{ Auth::user()->email }}"
+                                id="email" name="email">
                         </div>
                     </div>
             </div>
@@ -68,7 +68,7 @@
                         <label class="labels">Provinsi</label>
                         <select name="provinsi_cust" id="provinsi_cust" class="form-control">
                             @if (Auth::user()->provinsi_cust != '')
-                                <option value="{{ Auth::user()->provinsi_cust }}">{{ Auth::user()->provinsi_cust }}
+                                <option value="{{ Auth::user()->provinsi_cust }}">{{ $datadaerah->namaprovinsi }}
                                 </option>
                                 @foreach ($provinsi as $p)
                                     <option value="{{ $p->id }}">{{ $p->name }}</option>
@@ -84,19 +84,19 @@
                     <div class="form-group col-md-6">
                         <label class="labels">Kabupaten</label>
                         <select name="kabupaten_cust" id="kabupaten_cust" class="form-control">
-                            <option>{{ Auth::user()->kabupaten_cust }}</option>
+                            <option>{{ $datadaerah->namakabupaten }}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="labels">Kecamatan</label>
                         <select name="kecamatan_cust" id="kecamatan_cust" class="form-control">
-                            <option>{{ Auth::user()->kecamatan_cust }}</option>
+                            <option>{{ $datadaerah->namakecamatan }}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="labels">Desa</label>
                         <select name="desa_cust" id="desa_cust" class="form-control">
-                            <option>{{ Auth::user()->desa_cust }}</option>
+                            <option>{{ $datadaerah->namadesa }}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">

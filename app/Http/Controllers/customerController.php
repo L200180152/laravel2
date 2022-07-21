@@ -22,6 +22,17 @@ class customerController extends Controller
     {
         $data = [
             'judul' => 'Profil User | HUTS APPAREL',
+            'datadaerah' => User::join('provinces', 'provinces.id', '=', 'users.provinsi_cust')
+                ->join('regencies', 'regencies.id', '=', 'users.kabupaten_cust')
+                ->join('districts', 'districts.id', '=', 'users.kecamatan_cust')
+                ->join('villages', 'villages.id', '=', 'users.desa_cust')
+                ->select(
+                    'provinces.name as namaprovinsi',
+                    'regencies.name as namakabupaten',
+                    'districts.name as namakecamatan',
+                    'villages.name as namadesa'
+                )
+                ->firstWhere('users.id', Auth::user()->id),
             User::find(Auth::user()->id)->get(),
             'provinsi' => Province::all(),
             'cart_item' => cart::all()
@@ -34,7 +45,7 @@ class customerController extends Controller
         $editprofil = User::where('id', Auth::user()->id)->update(
             [
                 'un_cust' => strtolower(request()->un_cust),
-                'nama_cust' => request()->nama_cust,
+                'nama_cust' => ucfirst(request()->nama_cust),
                 'email' => strtolower(request()->email),
                 'nohp_cust' => request()->nohp_cust,
                 'alamat_cust' => ucfirst(request()->alamat_cust),

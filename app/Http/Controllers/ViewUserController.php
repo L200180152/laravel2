@@ -33,6 +33,14 @@ class ViewUserController extends Controller
         ]);
     }
 
+    public function customtransaksi()
+    {
+        return view('user.customtransaksi', [
+            "judul" => "Pesan Kaos | HUTS APPAREL",
+            'cart_item' => cart::where('id', Auth::check() ? Auth::user()->id : null)->get()
+        ]);
+    }
+
     public function payproduk()
     {
         return view('user.payproduk', [

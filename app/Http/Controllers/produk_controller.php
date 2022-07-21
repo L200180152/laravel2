@@ -115,9 +115,6 @@ class produk_controller extends Controller
                 ]
             );
         }
-
-
-
         return redirect()->route('rute_produkadmin')->with(['Success' => 'Data Berhasil Di Edit']);
     }
 }

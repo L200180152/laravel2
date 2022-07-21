@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use App\Models\User;
 
 class LoginRequest extends FormRequest
 {
@@ -71,6 +72,7 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
         // , $this->boolean('remember')
+        
         if (!Auth::attempt($this->only('un_cust', 'password'))) {
             RateLimiter::hit($this->throttleKey());
             throw ValidationException::withMessages([

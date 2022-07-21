@@ -30,105 +30,148 @@
         <div class="konten-custom">
             <div class="row">
                 {{-- Form Pemesanan --}}
-                <div class="col-md-6 form-custom p-2" style=" border-radius:20px">
-                    <h5 class="ms-2">Produksi/Pemesanan Kaos</h5>
-                    <form>
-                        <div class="card-body bg-warning border border-danger rounded ms-2" style="font-weight: bold;">
-                            <div class="form-group mb-3">
-                                <h5 for="nama_customer">Nama Project<span class="text-danger"
-                                        style="font-weight: bold;">*</span></h5>
-                                <input type="text" class="form-control" id="nama_project"
-                                    placeholder="Masukkan Nama Project">
-                            </div>
-                            <div class="form-group mb-3">
-                                <h5 for="nama_customer">Deskripsi Singkat<span class="text-danger"
-                                        style="font-weight: bold;">*</span></h5>
-                                <textarea name="nama_project" id="nama_project" class="form-control" placeholder="Masukkan Deskripsi Singkat"></textarea>
-                            </div>
-                            <div class="form-group mb-3">
-                                <h5 for="nama_customer">Ukuran Kaos<span class="text-danger"
-                                        style="font-weight: bold;">*</span>></h5>
-                                <ul class="list-group mt-2">
-                                    {{-- <li class="list-group-item d-flex align-items-center">
-                                        <input class="form-check-input me-1" type="checkbox" value="">
-                                        Small (45 x 67)
-                                        <input type="number" name="uk_S" id="uk_M" value="0"
-                                            onchange="edit(this.value)" class="ms-2" style="width:50px;">
-                                    </li> --}}
-                                    <li class="list-group-item d-flex align-items-center">
-                                        <input class="form-check-input me-1" type="checkbox" value="">
-                                        Medium (48 x 69)
-                                        <input type="number" name="uk_M" id="uk_M" class="ms-2"
-                                            style="width:50px;" onchange="edit(this.value)" value="0">
+                <div class="col-md-6 p-5" style=" border-radius:20px">
+                    @if (session()->has('berhasil'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session()->get('berhasil') }}
+                        </div>
+                    @elseif(session()->has('gagal'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session()->get('gagal') }}
+                        </div>
+                    @endif
 
-                                    </li>
-                                    <li class="list-group-item d-flex align-items-center">
-                                        <input class="form-check-input me-1" type="checkbox" value="">
-                                        Large (52 x 73)
-                                        <input type="number" name="uk_L" id="uk_L" class="ms-2" uk_XL
-                                            style="width:50px;" onchange="edit(this.value)" value="0">
+                    <form action="{{ route('pesankaos') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <h5>Produksi/Pemesanan Kaos</h5>
+                        <small>Pastikan Semua Sudah Terisi dengan benar</small><br>
+                        <label>Nama Project<span class="text-danger" style="font-weight: bold;">*</span></label>
+                        <input type="text" class="form-control @error('namaproject') is-invalid @enderror"
+                            id="namaproject" name="namaproject" placeholder="Masukkan Nama Project">
+                        @error('namaproject')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
 
-                                    </li>
-                                    <li class="list-group-item d-flex align-items-center">
-                                        <input class="form-check-input me-1" type="checkbox" value="">
-                                        X Large (54 x 75)
-                                        <input type="number" name="uk_XL" id="uk_XL" class="ms-2"
-                                            style="width:50px;" value="0">
-                                    </li>
-                                </ul>
+                        <label class="mt-3">Deskripsi Singkat<span class="text-danger"
+                                style="font-weight: bold;">*</span></label>
+                        <textarea name="desksingkat" id="desksingkat" class="form-control @error('desksingkat') is-invalid @enderror"
+                            placeholder="Masukkan Deskripsi Singkat"></textarea>
+                        @error('desksingkat')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
                             </div>
-                            <div class="form-group mb-3">
-                                <h5 for="nama_customer">Upload File Desain (ZIP/RAR)<span class="text-danger"
-                                        style="font-weight: bold;">*</span></h5>
-                                <small>(Jika tidak mempunyai desain bisa order desain melalui contact yang
-                                    tertera)</small><br>
-                                <button type="file" class="btn btn-block bg-primary bg-gradient btn-lg text-light"
-                                    webkitdirectory>Upload
-                                    File</button>
-                                <input id="input-folder" type="file" webkitdirectory>
-                            </div>
-                            <div class="form-group mb-3">
-                                <h5 for="nama_customer">Deadline Produksi<span class="text-danger"
-                                        style="font-weight: bold;">*</span></h5>
-                                <small>(Deadline produksi standar kami adalah 20 hari setelah semua disepakati)</small><br>
-                                <form action="#" class="row">
-                                    <div class="col-md-4">
-                                        <div class="datepicker">
-                                            <input type="text" class="form-control" id="input"
-                                                placeholder="Masukkan Tanggal">
-                                            <i class="fa-solid fa-calendar-days"></i>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="form-group mb-3">
-                                <h5 for="nama_customer">Lengan Kaos<span class="text-danger"
-                                        style="font-weight: bold;">*</span>></h5>
-                                <ul class="list-group mt-2">
-                                    <li class="list-group-item d-flex align-items-center">
-                                        <input class="form-check-input me-1" type="checkbox" value="">
-                                        Lengan Pendek
-                                        <input type="number" name="lgnkaospndk" id="lgnkaospndk" class="ms-2"
-                                            style="width:50px;" value="0">
-                                    </li>
-                                    <li class="list-group-item d-flex align-items-center">
-                                        <input class="form-check-input me-1" type="checkbox" value="">
-                                        Lengan Panjang (+Rp5.000)
-                                        <input type="number" name="lgnkaospnjg" id="lgnkaospnjg" class="ms-2"
-                                            style="width:50px;" value="0">
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="form-group mb-3">
-                                <h5 for="nama_customer">Model Kaos<span class="text-danger"
-                                        style="font-weight: bold;">*</span></h5>
-                                <small>Cotton Combed 30s</small>
-                            </div>
+                        @enderror
 
-                            <div class="form-group mb-3">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+
+                        @if (Auth::check())
+                            <label class="mt-3">Nomor HP<span class="text-danger"
+                                    style="font-weight: bold;">*</span></label>
+                            <input type="text" class="form-control @error('nohp_cust') is-invalid @enderror"
+                                placeholder="nomor hp" value="{{ Auth::user()->nohp_cust }}" id="nohp_cust" name="nohp_cust"
+                                readonly>
+                            @error('nohp_cust')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <small>Pastikan Nomor HP sudah terisi dibagian profil user</small><br>
+                        @else
+                        @endif
+
+                        <label class="mt-3">Ukuran Kaos<span class="text-danger"
+                                style="font-weight: bold;">*</span></label>
+                        <li class="list-group-item d-flex align-items-center">
+                            Medium (48 x 69)
+                            <input type="text" class="form-control ms-3 @error('uk_M') is-invalid @enderror"
+                                name="uk_M" id="uk_M" placeholder="Jumlah" style="width:100px;">
+                            @error('uk_M')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            Large (52 x 73)
+                            <input type="text" class="form-control ms-3 @error('uk_L') is-invalid @enderror"
+                                name="uk_L" id="uk_L" placeholder="Jumlah" style="width:100px;">
+                            @error('uk_L')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            X Large (54 x 75)
+                            <input type="text" class="form-control ms-3 @error('uk_XL') is-invalid @enderror"
+                                name="uk_XL" id="uk_XL" placeholder="Jumlah" style="width:100px;">
+                            @error('uk_XL')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </li>
+
+                        <label class="mt-3">Lengan Kaos<span class="text-danger"
+                                style="font-weight: bold;">*</span></label>
+                        {{-- <li class="list-group-item d-flex align-items-center">
+                            Pendek
+                            <input type="text" class="form-control ms-3 @error('lgnkaospndk') is-invalid @enderror"
+                                name="lgnkaospndk" id="lgnkaospndk" placeholder="Jumlah" style="width:100px;">
+                            @error('lgnkaospndk')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </li> --}}
+                        <li class="list-group-item d-flex align-items-center">
+                            Panjang (+5000)
+                            <input type="text" class="form-control ms-3 me-2 @error('lgnkaospnjg') is-invalid @enderror"
+                                name="lgnkaospnjg" id="lgnkaospnjg" placeholder="Jumlah" style="width:100px;">
+                            <small>(sisanya otomatis dihitung sebagai lengan pendek)</small>
+                            @error('lgnkaospnjg')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </li>
+
+                        <label class="mt-3">Upload File Desain (ZIP/RAR)<span class="text-danger"
+                                style="font-weight: bold;">*</span></label>
+                        <small>(Jika tidak mempunyai desain bisa order desain melalui contact yang
+                            tertera)</small><br>
+                        <input type="file" class="@error('uploadrar') is-invalid @enderror" id="uploadrar"
+                            name="uploadrar">
+                        @error('uploadrar')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                        <div class="form-group mt-3 mb-3">
+                            <label>Jenis Sablon<span class="text-danger" style="font-weight: bold;">*</span></label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="jenissablon" id="rubber"
+                                    value="Rubber" checked>
+                                <label class="form-check-label" for="jenissablon">
+                                    Rubber
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="jenissablon" id="plastisol"
+                                    value="Plastisol">
+                                <label class="form-check-label" for="jenissablon">
+                                    Plastisol
+                                </label>
                             </div>
                         </div>
+
+                        @if (Auth::check())
+                            <button type="submit" class="btn btn-primary mt-2">Masukkan Pesanan</button>
+                        @else
+                            <a href="/login" class="btn btn-primary mt-2">Masukkan Pesanan</a>
+                        @endif
                     </form>
                 </div>
                 {{-- Pembayaran --}}
@@ -138,33 +181,34 @@
                     <div class="totalharga p-4">
                         <input type="hidden" id="harga_dasar" value="60000">
                         <h2>Rp. 60.000,00/pcs</h2>
+                        <small>(Harga belum pasti, Bisa berubah tergantung kerumitan desain)</small>
                     </div>
-                    <hr style="width: 98%">
+                    {{-- <hr style="width: 98%"> --}}
                     {{-- Detail Pemesanan --}}
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <h5>Detail Pemesanan</h5>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="font-weight:bold">Jumlah</td>
-                                <td></td>
-                                <td>: 0</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td style="font-weight:bold">Total Harga</td>
-                                <input type="hidden" id="total_harga" value="1400000">
-                                <td id="display_total">0</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="row" style="font-family: 'Arial Narrow Bold', sans-serif;">
-                        <a href="#" onclick="konfirm()"
-                            class="konfirmasi-custom btn btn-primary bg-gradient p-3 m-2">Konfirmasi Pesanan</a>
-                    </div>
+                    {{-- <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <h5>Detail Pemesanan</h5>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight:bold">Jumlah</td>
+                            <td></td>
+                            <td>: 0</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="font-weight:bold">Total Harga</td>
+                            <input type="hidden" id="total_harga" value="1400000">
+                            <td id="display_total">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row" style="font-family: 'Arial Narrow Bold', sans-serif;">
+                    <a href="#" onclick="konfirm()"
+                        class="konfirmasi-custom btn btn-primary bg-gradient p-3 m-2">Konfirmasi Pesanan</a>
+                </div> --}}
 
                     {{-- Carousel --}}
                     <div class="carousel-pricelist">
@@ -200,10 +244,11 @@
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
 
-    <script>
+    {{-- <script>
         function edit(value) {
             console.log('test');
             var x = value * document.getElementById('harga_dasar').value;
@@ -223,12 +268,5 @@
         $(function() {
             $('#datepicker').datepicker();
         });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $("#input-folder-1").fileinput({
-                browseLabel: 'Select Folder...'
-            });
-        });
-    </script>
+    </script> --}}
 @endsection
